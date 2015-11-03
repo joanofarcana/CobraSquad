@@ -1,7 +1,14 @@
 # CobraSquad
- COMP249 code group
+	COMP249 code group
 
-Kyla Lea <t> < kylaslea@gmail.com ><br>
-Arielle Evans <t> < ariellelevans@gmail.com ><br>
-Himmet Arican <t> < aricanhimmet@gmail.com ><br>
-Nina Prentiss <t> < nprentiss@gmail.com ><br>
+Kyla Lea <br>
+			< kylaslea@gmail.com ><p>
+
+Arielle Evans <br>
+			< ariellelevans@gmail.com ><p>
+
+Himmet Arican <br>
+			< aricanhimmet@gmail.com ><p>
+
+Nina Prentiss <br>
+			< nprentiss@gmail.com ><br>
