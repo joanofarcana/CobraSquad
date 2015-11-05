@@ -21,6 +21,8 @@ public class Driver {
 		// Declaraions
 		Scanner userInput = new Scanner(System.in);
 		File newFile;
+		File oldFile = new File("Initial_Book_Info.txt");
+		BufferedInputStream oldFileReader = null;
 		PrintWriter newFileWriter = null;
 		boolean validFileName = false;
 		
@@ -35,13 +37,15 @@ public class Driver {
 			newFile = new File(userInput.nextLine());
 			if (!newFile.exists()){
 				try {
-					newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 					validFileName = true;
+					oldFileReader = new BufferedInputStream(new FileInputStream(oldFile));
+					newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 				}
 				catch (IOException e) {
 					
 				}
 				finally {
+					oldFileReader.close();
 					newFileWriter.close();
 					userInput.close();
 				}
