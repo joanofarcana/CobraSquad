@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------
 // Assignment 2 part 1
 // 
-// Written by: Nina Prentiss	6270611
+// Written by: Nina Prentiss	26270611
 //
 // For COMP249 Section: 	D
 //				Tutorial: 	DB
@@ -40,17 +40,23 @@ public class Driver {
 					validFileName = true;
 					oldFileReader = new BufferedInputStream(new FileInputStream(oldFile));
 					newFileWriter = new PrintWriter(new FileOutputStream(newFile));
+					fixInventory(oldFileReader, newFileWriter);
+					displayFileContents(oldFile);
+					displayFileContents(newFile);
 				}
 				catch (IOException e) {
-					
+					System.out.println(e.getMessage());
 				}
 				finally {
 					newFileWriter.close();
 					userInput.close();
+					System.out.println("============================================\n\n"
+						+ "Thank you for using the Library Inventory Program!\n\n"
+						+ "============================================\n");
 				}
 			}
 			else {
-				System.out.println("Sorry, a " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
+				System.out.println("An error occured. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
 			}
 		}
 	}
