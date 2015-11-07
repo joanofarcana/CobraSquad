@@ -18,7 +18,7 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		// Declaraions
+		// Declarations
 		Scanner userInput = new Scanner(System.in);
 		File newFile;
 		File oldFile = new File("Initial_Book_Info.txt");
@@ -45,7 +45,6 @@ public class Driver {
 					
 				}
 				finally {
-					oldFileReader.close();
 					newFileWriter.close();
 					userInput.close();
 				}
