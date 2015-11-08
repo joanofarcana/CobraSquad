@@ -107,9 +107,8 @@ public class BookInventory1 {
 			for (int k = j + 1; k < records; k++) {
 				if (bkArr[k].getISBN() == isbn) {
 					do {
-				    System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
-					bkArr[k].setISBN(userInput.nextLong());
-					
+						System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
+						bkArr[k].setISBN(userInput.nextLong());				
 					} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
 				}
 			}
