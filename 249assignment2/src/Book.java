@@ -9,7 +9,6 @@
 // For COMP249 Section: (Substitute your section letter(s))
 // ---------------------------------------------------------------
 
-package assignment2;
 
 public class Book {
 
@@ -42,12 +41,12 @@ public class Book {
 	
 	public Book(long ISBN, String title, int issueYear, String author, double price, int numberOfPages) {
 		
-		this.price = price;
 		this.ISBN = ISBN;
-		this.numberOfPages = numberOfPages;
-		this.author = author;
 		this.title = title;
 		this.issueYear = issueYear;
+		this.author = author;
+		this.price = price;
+		this.numberOfPages = numberOfPages;
 		
 	}
 	
@@ -56,12 +55,12 @@ public class Book {
 	
 	public Book(Book b) {
 		
-		price = b.price;
 		ISBN = b.ISBN;
-		numberOfPages = b.numberOfPages;
+		title = b.title;
 		issueYear = b.issueYear;
 		author = b.author;
-		title = b.title;
+		price = b.price;
+		numberOfPages = b.numberOfPages;
 		
 	}
 	
@@ -70,7 +69,7 @@ public class Book {
 	
 	public String toString()
 	{
-		return ("This book is called " + this.getTitle() + ", by " + this.getAuthor() + ". It is priced at "+this.getPrice()+"$, " +
+		return ("This book is called " + this.getTitle() + ", by " + this.getAuthor() + ". It is priced at $"+this.getPrice()+", " +
 				"has " +this.getNumberOfPages() +" pages, was issued in " + this.getIssueYear() +", and has an ISBN of " +this.getISBN()+".");
 	}
 	
