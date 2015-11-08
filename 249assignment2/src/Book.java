@@ -9,7 +9,6 @@
 // For COMP249 Section: (Substitute your section letter(s))
 // ---------------------------------------------------------------
 
-package assignment2;
 
 public class Book {
 
