@@ -87,7 +87,7 @@ public class BookInventory1 {
 		
 				if (records <= 1) 
 					{
-					System.out.println("No records detected");
+					System.out.println("No correction needed");
 					System.exit(0);
 					} 
 				else 
