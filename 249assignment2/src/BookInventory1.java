@@ -8,13 +8,7 @@
 //
 // For COMP249 Section: (Substitute your section letter(s))
 // ---------------------------------------------------------------
-/*
- * Stuff to be fixed:
- * 
- * 	
- * 	
- * 	fileInventory accepts file stream names and not strings...???????? sorry i am sleep
- */
+
 
 import java.util.Scanner;
 import java.io.*;
@@ -29,21 +23,19 @@ public class BookInventory1 {
  * 
  */
 	private static final String inname = "Initial_Book_Info.txt";
-	private static String outname = null;
+	// private static String outname = null;
 	
 					// 1
 					// countBooks Method
 	
-	public static int countBooks(BufferedInputStream input) {
+	public static int countBooks(Scanner input) {
 		int numOfLines = 0;
 		try {
-		    System.out.println("hi");
 			while (input.hasNextLong()){
 				numOfLines++;
 			    input.nextLine();
 			}
 			input.close();
-			System.out.println(""+numOfLines);
 		} catch (Exception e) {
 		    e.printStackTrace();
 			return 0;
@@ -67,20 +59,19 @@ public class BookInventory1 {
 
 					// 3
 					// bkArr
-	
-	public static Book[] bkArr = new Book[countBooks(inname)];
+	static Scanner input = new Scanner(inname);
+	public static Book[] bkArr = new Book[countBooks(input)];
 	
 	
 					// 4
 					// fixInventory Method
 	
-	public static void fixInventory(BufferedInputStream input, PrintWriter output) throws Exception {
+	public static void fixInventory(Scanner input, PrintWriter output) throws Exception {
 			
 			// 4.1
 			// Records counter + SysPrint
 		
-		// Scanner input = new Scanner(System. in );
-		int records = countBooks(input.getName());
+		int records = countBooks(input);
 		
 				if (records <= 1) 
 					{
@@ -101,7 +92,7 @@ public class BookInventory1 {
 				String _title;
 				String _author;
 				double _price;
-				int _numberOfPages; // sorry i know it took a lot to copy and paste temp but i went crazy trying to fix a bug that wasn't there lol
+				int _numberOfPages; 
 		
 		    File file1 = new File(inname);
 		    Scanner scan = new Scanner(file1);
@@ -120,7 +111,7 @@ public class BookInventory1 {
 					    	_price = Double.parseDouble(scan.next());
 					    	_numberOfPages = Integer.parseInt(scan.next());
 						    
-						    System.out.println(""+_ISBN); // ~~
+						    System.out.println(""+_ISBN); 
 						    
 						    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
 						}
@@ -144,7 +135,7 @@ public class BookInventory1 {
 						}
 					}
 				}
-			
+			scan.close();
 			}
 	
 					// 5
@@ -184,7 +175,7 @@ public class BookInventory1 {
 				Scanner userInput = new Scanner(System.in);
 				File newFile;
 				File oldFile = new File(inname);
-				BufferedInputStream oldFileReader = null;
+				Scanner oldFileReader = null;
 				PrintWriter newFileWriter = null;
 				boolean validFileName = false;
 				
@@ -200,7 +191,7 @@ public class BookInventory1 {
 					if (!newFile.exists()){
 						try {
 							validFileName = true;
-							oldFileReader = new BufferedInputStream(new FileInputStream(oldFile));
+							oldFileReader = new Scanner(oldFile);
 							newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 							fixInventory(oldFileReader, newFileWriter); // fileInventory should accept two streams
 							displayFileContents(oldFile);
@@ -208,6 +199,9 @@ public class BookInventory1 {
 						}
 						catch (IOException e) {
 							System.out.println(e.getMessage());
+						}
+						catch (Exception e) {
+							System.out.println("Help!");
 						}
 						finally {
 							newFileWriter.close();
@@ -218,10 +212,7 @@ public class BookInventory1 {
 						}
 					}
 					else {
-						while(newFile.exists())
-						{
-							System.out.println("An error occured. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
-						}
+						System.out.println("An error occured. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
 					}
 				}
 			}
