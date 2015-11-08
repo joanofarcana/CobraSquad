@@ -2,7 +2,7 @@ public class DuplicateISBNException extends Exception{
         
     //default constructor
     public DuplicateISBNException() {        
-        super("Duplicated ISBN number1111");
+        super("Duplicated ISBN number");
     }
     
     //constructor with message
