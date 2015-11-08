@@ -8,7 +8,7 @@ public class DuplicateISBNException extends Exception{
     //default constructor
     public DuplicateISBNException()
     {        
-        super("Duplicated ISBN number1111");
+        super("Error....Duplicate Entry of ISBN. The  entered ISBN exists for another record");
     }
     
     //constuctor with message
