@@ -22,25 +22,26 @@ public class BookInventory1 {
  * 
  * 
  */
-	private static final String inname = "Initial_Book_Info.txt";
-	// private static String outname = null;
+	
 	
 					// 1
 					// countBooks Method
 	
-	public static int countBooks(Scanner input) {
-		int numOfLines = 0;
+	public static int countBooks(File in) {
 		try {
+			Scanner input = new Scanner(in);
+			int numOfLines = 0;
 			while (input.hasNextLong()){
 				numOfLines++;
 			    input.nextLine();
 			}
 			input.close();
-		} catch (Exception e) {
+			return numOfLines;
+		}
+		catch (Exception e) {
 		    e.printStackTrace();
 			return 0;
 		}
-		return numOfLines;
 	}
 	
 					// 2
@@ -57,21 +58,18 @@ public class BookInventory1 {
 			return false;
 		}
 
-					// 3
-					// bkArr
-	static Scanner input = new Scanner(inname);
-	public static Book[] bkArr = new Book[countBooks(input)];
 	
 	
 					// 4
 					// fixInventory Method
 	
-	public static void fixInventory(Scanner input, PrintWriter output) throws Exception {
+	public static void fixInventory(File in, PrintWriter output) throws Exception {
 			
 			// 4.1
 			// Records counter + SysPrint
-		
-		int records = countBooks(input);
+		Scanner input = new Scanner(in);
+		int records = countBooks(in);
+		System.out.println(records);
 		
 				if (records <= 1) 
 					{
@@ -88,38 +86,35 @@ public class BookInventory1 {
 				// Creating Book Array
 				
 				long _ISBN;
-				int _issueYear;
 				String _title;
+				int _issueYear;
 				String _author;
 				double _price;
 				int _numberOfPages; 
 		
-		    File file1 = new File(inname);
-		    Scanner scan = new Scanner(file1);
 		    
 			System.out.println("Creating database of "+records+" records..."); 
 			
 				for (int i = 0; i < records; i++) 
 				{
-				    
-		            if(scan.hasNextLong())
+				    System.out.println(bkArr[i]);
+		            if(input.hasNextLong())
 		            	{
-					    	_ISBN = Long.parseLong(scan.next(), 10);
-					    	_title = scan.next();
-					    	_issueYear = Integer.parseInt(scan.next());
-					    	_author = scan.next();
-					    	_price = Double.parseDouble(scan.next());
-					    	_numberOfPages = Integer.parseInt(scan.next());
+					    	_ISBN = Long.parseLong(input.next(), 10);
+					    	_title = input.next();
+					    	_issueYear = Integer.parseInt(input.next());
+					    	_author = input.next();
+					    	_price = Double.parseDouble(input.next());
+					    	_numberOfPages = Integer.parseInt(input.next());
 						    
-						    System.out.println(""+_ISBN); 
-						    
+					    	System.out.println("bkArr[].length is " + bkArr.length);
 						    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
 						}
 				}
 
 			for (int j = 0; j < records; j++) 
 				{
-				
+				 
 				long isbn = bkArr[j].getISBN();
 				
 				for (int k = j + 1; k < records; k++) 
@@ -135,7 +130,7 @@ public class BookInventory1 {
 						}
 					}
 				}
-			scan.close();
+			input.close();
 			}
 	
 					// 5
@@ -160,6 +155,10 @@ public class BookInventory1 {
 			}
 	}
 
+	// 3
+	// bkArr
+	static Book[] bkArr;
+	private static final File oldFile = new File("Initial_Book_Info.txt");
 
 	/* 
 	 * 
@@ -172,50 +171,55 @@ public class BookInventory1 {
 	public static void main(String[] args) {
 		
 		// Declarations
-				Scanner userInput = new Scanner(System.in);
-				File newFile;
-				File oldFile = new File(inname);
-				Scanner oldFileReader = null;
-				PrintWriter newFileWriter = null;
-				boolean validFileName = false;
+		Scanner oldFileReader = null;
+		try {
+			oldFileReader = new Scanner(oldFile);
+		} catch (FileNotFoundException e) {
+			e.getMessage();
+		}
+		bkArr = new Book[countBooks(oldFile)];
+		
+		File newFile;
+		Scanner userInput = new Scanner(System.in);
+		PrintWriter newFileWriter = null;
+		boolean validFileName = false;
 				
-				// Welcome Message
-				System.out.println("============================================\n\n"
-								+ "Welcome to the Library Inventory Program!\n\n"
-								+ "============================================\n");
-				
-				// User Input
-				while (!validFileName) {
-					System.out.println("Please enter a file name in which to save new modified inventory.");
-					newFile = new File(userInput.nextLine());
-					if (!newFile.exists()){
-						try {
-							validFileName = true;
-							oldFileReader = new Scanner(oldFile);
-							newFileWriter = new PrintWriter(new FileOutputStream(newFile));
-							fixInventory(oldFileReader, newFileWriter); // fileInventory should accept two streams
-							displayFileContents(oldFile);
-							displayFileContents(newFile);
-						}
-						catch (IOException e) {
-							System.out.println(e.getMessage());
-						}
-						catch (Exception e) {
-							System.out.println("Help!");
-						}
-						finally {
-							newFileWriter.close();
-							userInput.close();
-							System.out.println("============================================\n\n"
-								+ "Thank you for using the Library Inventory Program!\n\n"
-								+ "============================================\n");
-						}
+			// Welcome Message
+			System.out.println("============================================\n\n"
+							+ "Welcome to the Library Inventory Program!\n\n"
+							+ "============================================\n");
+			
+			// User Input
+			while (!validFileName) {
+				System.out.println("Please enter a file name in which to save new modified inventory.");
+				newFile = new File(userInput.nextLine());
+				if (!newFile.exists()){
+					try {
+						validFileName = true;
+						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
+						fixInventory(oldFile, newFileWriter); // fixInventory should accept two streams
+						displayFileContents(oldFile);
+						displayFileContents(newFile);
 					}
-					else {
-						System.out.println("An error occured. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
+					catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+					finally {
+						newFileWriter.close();
+						userInput.close();
+						System.out.println("============================================\n\n"
+							+ "Thank you for using the Library Inventory Program!\n\n"
+							+ "============================================\n");
 					}
 				}
+				else {
+					System.out.println("An error occured. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
+				}
 			}
+		}
 	
 	}
 		
