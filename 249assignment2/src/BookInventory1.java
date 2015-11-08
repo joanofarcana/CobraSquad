@@ -38,7 +38,8 @@ public class BookInventory1 {
 			return numOfLines;
 		}
 		catch (Exception e) {
-		    e.printStackTrace();
+			System.out.print("countBooks() ");
+			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -113,10 +114,10 @@ public class BookInventory1 {
 				}
 			}
 			output.println(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages());
-			input.close();
-			output.close();
-			userInput.close();
 		}
+		input.close();
+		output.close();
+		userInput.close();
 	}
 	
 					// 5
@@ -132,6 +133,7 @@ public class BookInventory1 {
 			contentScanner.close();
 		} 
 		catch (FileNotFoundException e) {
+			System.out.print("displayFileContents() ");
 			e.printStackTrace();
 		}
 	}
@@ -154,7 +156,7 @@ public class BookInventory1 {
 		// Declarations
 		bkArr = new Book[countBooks(oldFile)];
 		
-		File newFile;
+		File newFile = null;
 		Scanner userInput = new Scanner(System.in);
 		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
@@ -179,10 +181,13 @@ public class BookInventory1 {
 						displayFileContents(newFile);
 					}
 					catch (IOException e) {
+						System.out.println("IOException in the main.");
 						System.out.println(e.getMessage());
 					}
 					catch (Exception e) {
+						System.out.println("Other Exception in the main.");
 						System.out.println(e.getMessage());
+						e.printStackTrace();
 					}
 					finally {
 						newFileWriter.close();
