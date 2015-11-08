@@ -15,7 +15,6 @@
  * 	
  * 	fileInventory accepts file stream names and not strings...???????? sorry i am sleep
  */
-package assignment2;
 
 import java.util.Scanner;
 import java.io.*;

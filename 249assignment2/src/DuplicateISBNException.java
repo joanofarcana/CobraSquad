@@ -1,6 +1,3 @@
-package assign2;
-
-
 public class DuplicateISBNException extends Exception{
     
     private String message;
@@ -11,7 +8,7 @@ public class DuplicateISBNException extends Exception{
         super("Duplicated ISBN number1111");
     }
     
-    //constuctor with message
+    //constructor with message
     public DuplicateISBNException(String message)
     {
         super(message);
