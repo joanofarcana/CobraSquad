@@ -68,52 +68,45 @@ public class BookInventory1 {
 			// 4.1
 			// Records counter + SysPrint
 		Scanner input = new Scanner(in);
+		Scanner userInput = new Scanner(System.in);
 		int records = countBooks(in);
-		System.out.println(records);
 		
-				if (records <= 1) 
-					{
-					System.out.println("No records detected");
-					System.exit(0);
-					} 
-				else 
-					{
-					System.out.println("Processing number of records...");
-					
-					}
-		
-				// 4.2 
-				// Creating Book Array
-				
-				long _ISBN;
-				String _title;
-				int _issueYear;
-				String _author;
-				double _price;
-				int _numberOfPages; 
+			if (records <= 1) {
+				System.out.println("No records detected");
+				System.exit(0);
+				} 
+			else {
+				System.out.println("Processing number of records...");
+				}
+	
+			// 4.2 
+			// Creating Book Array
+			
+			long _ISBN;
+			String _title;
+			int _issueYear;
+			String _author;
+			double _price;
+			int _numberOfPages; 
 		
 		    
 			System.out.println("Creating database of "+records+" records..."); 
 			
-				for (int i = 0; i < records; i++) 
-				{
-				    System.out.println(bkArr[i]);
-		            if(input.hasNextLong())
-		            	{
-					    	_ISBN = Long.parseLong(input.next(), 10);
-					    	_title = input.next();
-					    	_issueYear = Integer.parseInt(input.next());
-					    	_author = input.next();
-					    	_price = Double.parseDouble(input.next());
-					    	_numberOfPages = Integer.parseInt(input.next());
-						    
-					    	System.out.println("bkArr[].length is " + bkArr.length);
-						    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
-						}
+			for (int i = 0; i < records; i++) 
+			{
+	            if(input.hasNextLong()) {
+			    	_ISBN = Long.parseLong(input.next(), 10);
+			    	_title = input.next();
+			    	_issueYear = Integer.parseInt(input.next());
+			    	_author = input.next();
+			    	_price = Double.parseDouble(input.next());
+			    	_numberOfPages = Integer.parseInt(input.next());
+				    
+				    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
 				}
+			}
 
-			for (int j = 0; j < records; j++) 
-				{
+			for (int j = 0; j < records; j++) {
 				 
 				long isbn = bkArr[j].getISBN();
 				
@@ -124,32 +117,32 @@ public class BookInventory1 {
 						{
 							do {
 						    System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
-							bkArr[k].setISBN(input.nextLong());
+							bkArr[k].setISBN(userInput.nextLong());
 							
 							} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
 						}
 					}
+				output.println(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages());
+				System.out.println(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages());
 				}
+			
 			input.close();
+			userInput.close();
 			}
 	
 					// 5
 					// displayFileContents method
 
-	public static void displayFileContents(File file)
-	{
-		System.out.println("/n/n Now displaying contents of: /n/n");
+	public static void displayFileContents(File file) {
+		System.out.println("\n\nNow displaying contents of " + file.getName() + ": \n");
 		try {
 			Scanner contentScanner = new Scanner(file);
-			
-			while(contentScanner.hasNextLong())
-				{
+			while(contentScanner.hasNextLong()) {
 					System.out.println(contentScanner.nextLine());
 				}
 			
 			contentScanner.close();
-			
-			} 
+		} 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 			}
@@ -171,7 +164,7 @@ public class BookInventory1 {
 	public static void main(String[] args) {
 		
 		// Declarations
-		Scanner oldFileReader = null;
+		Scanner oldFileReader;
 		try {
 			oldFileReader = new Scanner(oldFile);
 		} catch (FileNotFoundException e) {
