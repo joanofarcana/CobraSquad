@@ -70,7 +70,7 @@ public class Book {
 	
 	public String toString()
 	{
-		return ("This book is called " + this.getTitle() + ", by " + this.getAuthor() + ". It is priced at "+this.getPrice()+", " +
+		return ("This book is called " + this.getTitle() + ", by " + this.getAuthor() + ". It is priced at "+this.getPrice()+"$, " +
 				"has " +this.getNumberOfPages() +" pages, was issued in " + this.getIssueYear() +", and has an ISBN of " +this.getISBN()+".");
 	}
 	
