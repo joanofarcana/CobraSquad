@@ -18,111 +18,22 @@ public class BookInventory2 {
 	
 /* 
  * 
- * +++++++BookInventory1 Class Methods+++++++
+ * +++++++BookInventory2 Class Methods+++++++
  * 
  * 
  */
 	
-					// 1
-					// countBooks Method
-	
-	public static int countBooks(File in) {
-		try {
-			Scanner input = new Scanner(in);
-			int numOfLines = 0;
-			while (input.hasNextLong()){
-				numOfLines++;
-			    input.nextLine();
-			}
-			input.close();
-			return numOfLines;
-		}
-		catch (Exception e) {
-			System.out.print("countBooks() ");
-			e.printStackTrace();
-			return 0;
-		}
-	}
-	
-					// 2
-					// Check Duplicate ISBN Method
-
-	public static boolean checkDuplicate(Book[] array, long isbn, int index) {
-		for (int i = 0; i < index; i++) {
-			if ((array[i].getISBN() == isbn)&&(i!=index)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	
-	
-					// 4
-					// fixInventory Method
-	
-	public static void fixInventory(Scanner input, PrintWriter output) throws Exception {
-			
-			// 4.1
-			// Records counter + SysPrint
-		Scanner userInput = new Scanner(System.in);
-		int records = bkArr.length;
+				// 1
+				// addRecords()
+	public void addRecords(FileOutputStream output) {
 		
-		if (records <= 1) {
-			System.out.println("No records detected");
-			System.exit(0);
-		} 
-		else {
-			System.out.println("Processing number of records...");
-		}
-
-			// 4.2 
-			// Creating Book Array
-			
-		long _ISBN;
-		String _title;
-		int _issueYear;
-		String _author;
-		double _price;
-		int _numberOfPages; 
-	
-		    
-		System.out.println("Creating database of "+records+" records..."); 
-			
-		for (int i = 0; i < records; i++) {
-            if(input.hasNextLong()) {
-		    	_ISBN = Long.parseLong(input.next(), 10);
-		    	_title = input.next();
-		    	_issueYear = Integer.parseInt(input.next());
-		    	_author = input.next();
-		    	_price = Double.parseDouble(input.next());
-		    	_numberOfPages = Integer.parseInt(input.next());
-			    
-			    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
-			}
-		}
-
-		for (int j = 0; j < records; j++) {
-			long isbn = bkArr[j].getISBN();
-			for (int k = j + 1; k < records; k++) {
-				if (bkArr[k].getISBN() == isbn) {
-					do {
-						System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
-						bkArr[k].setISBN(userInput.nextLong());				
-					} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
-				}
-			}
-			output.println(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages());
-		}
-		input.close();
-		output.close();
-		userInput.close();
 	}
-	
-					// 5
-					// displayFileContents method
-
-	public static void displayFileContents(File file) {
+				
+				// 2
+				// displayFileContents()
+	public static void displayFileContents(BufferedReader input) {
+		/** 
+		
 		System.out.println("\n\nNow displaying contents of " + file.getName() + ": \n");
 		try {
 			Scanner contentScanner = new Scanner(file);
@@ -134,11 +45,32 @@ public class BookInventory2 {
 		catch (FileNotFoundException e) {
 			System.out.print("displayFileContents() ");
 			e.printStackTrace();
-		}
+		} 
+		
+		**/
 	}
 
 				// 3
-				// static bkArr Declaration
+				// binaryBookSearch()
+	public void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
+		int count = 0;
+		while (start <= end) {
+			int mid = start + (end - start)/2;
+			count++;
+			if (arr[mid].getISBN() < isbn) {
+				start = mid + 1; 
+			}
+			else if (arr[mid].getISBN() > isbn) {
+				end = mid - 1;
+			}
+			else {
+				System.out.println("Took " + count + " iterations to find book with isbn #" + isbn + ".");
+				System.out.println(arr[mid].toString());
+			}
+		}
+		System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
+	}
+	
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
 
@@ -152,6 +84,7 @@ public class BookInventory2 {
 	
 	public static void main(String[] args) {
 		
+		/**
 		// Declarations
 		bkArr = new Book[countBooks(oldFile)];
 		
@@ -175,6 +108,7 @@ public class BookInventory2 {
 						validFileName = true;
 						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 						oldFileReader = new Scanner(oldFile);
+						System.out.println(oldFileReader.toString());
 						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
 						displayFileContents(oldFile);
 						displayFileContents(newFile);
@@ -197,9 +131,9 @@ public class BookInventory2 {
 					}
 				}
 				else {
-					System.out.println("An error occured. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
+					System.out.println("An error occurred. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
 				}
 			}
-		}
-	
+		**/
 	}
+}
