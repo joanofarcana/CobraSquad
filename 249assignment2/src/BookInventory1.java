@@ -123,10 +123,10 @@ public class BookInventory1 {
 						}
 					}
 				output.println(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages());
-				System.out.println(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages());
 				}
 			
 			input.close();
+			output.close();
 			userInput.close();
 			}
 	
@@ -203,7 +203,7 @@ public class BookInventory1 {
 					finally {
 						newFileWriter.close();
 						userInput.close();
-						System.out.println("============================================\n\n"
+						System.out.println("\n============================================\n\n"
 							+ "Thank you for using the Library Inventory Program!\n\n"
 							+ "============================================\n");
 					}
