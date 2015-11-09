@@ -122,21 +122,14 @@ public class BookInventory1 {
 					// 5
 					// displayFileContents method
 
-	public static void displayFileContents(File file) {
-		System.out.println("\n\nNow displaying contents of " + file.getName() + ": \n");
-		try {
-			Scanner contentScanner = new Scanner(file);
-			while(contentScanner.hasNextLong()) {
-					System.out.println(contentScanner.nextLine());
-			}
-			contentScanner.close();
-		} 
-		catch (FileNotFoundException e) {
-			System.out.print("displayFileContents() ");
-			e.printStackTrace();
+		public static void displayFileContents(Scanner stream) {
+		Scanner contentScanner = stream;
+		while(contentScanner.hasNextLong()) {
+				System.out.println(contentScanner.nextLine());
 		}
+		contentScanner.close();
 	}
-
+	
 				// 3
 				// static bkArr Declaration
 	static Book[] bkArr;
@@ -176,8 +169,10 @@ public class BookInventory1 {
 						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 						oldFileReader = new Scanner(oldFile);
 						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
-						displayFileContents(oldFile);
-						displayFileContents(newFile);
+						System.out.println("\n\nNow displaying contents of " + oldFile.getName() + ": \n");
+						displayFileContents(oldFileReader);
+						System.out.println("\n\nNow displaying contents of " + newFile.getName() + ": \n");
+						displayFileContents(newFileReader);
 					}
 					catch (IOException e) {
 						System.out.println("IOException in the main.");
