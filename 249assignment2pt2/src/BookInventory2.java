@@ -42,10 +42,12 @@ public class BookInventory2 {
 						yesAddNew = kb.nextBoolean(); // determine how the user will input the boolean 
 						}
 					catch (FileNotFoundException e) {
+						kb.nextLine();
 						System.out.print("Error: File Not Found in addRecords().");
 						e.printStackTrace();; // exception message
 					}
 					catch (IOException e) {
+						kb.nextLine();
 						System.out.print("Error: IOException in addRecords().");
 						e.printStackTrace();
 					}
@@ -151,6 +153,7 @@ public class BookInventory2 {
 			return numOfLines;
 		}
 		catch (Exception e) {
+			input.nextLine();
 			System.out.print("Error: Could not count books.");
 			e.printStackTrace();
 			return 0;
@@ -203,7 +206,12 @@ public class BookInventory2 {
 			addRecords(oldFileWriter);
 			displayFileContents(oldFileReader);
 		} 
+<<<<<<< HEAD
 		catch (FileNotFoundException e) {
+=======
+		catch (Exception e) {
+		
+>>>>>>> origin/master
 			System.out.println("Error: Could not open files.");
 			e.printStackTrace();
 		}
