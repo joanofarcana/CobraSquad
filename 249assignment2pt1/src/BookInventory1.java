@@ -123,11 +123,10 @@ public class BookInventory1 {
 					// displayFileContents method
 
 	public static void displayFileContents(Scanner stream) {
-		Scanner contentScanner = stream;
-		while(contentScanner.hasNextLong()) {
-				System.out.println(contentScanner.nextLine());
+		while(stream.hasNextLong()) {
+				System.out.println(stream.nextLine());
 		}
-		contentScanner.close();
+		stream.close();
 	}
 	
 				// 3
