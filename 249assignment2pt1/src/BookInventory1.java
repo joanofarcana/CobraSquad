@@ -10,6 +10,8 @@
 // ---------------------------------------------------------------
 
 
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
 
@@ -25,6 +27,7 @@ public class BookInventory1 {
 	
 					// 1
 					// countBooks Method
+					// by Arielle Evans
 	
 	public static int countBooks(File in) {
 		try {
@@ -46,6 +49,7 @@ public class BookInventory1 {
 	
 					// 2
 					// Check Duplicate ISBN Method
+					// by Arielle Evans
 
 	public static boolean checkDuplicate(Book[] array, long isbn, int index) {
 		for (int i = 0; i < index; i++) {
@@ -60,6 +64,7 @@ public class BookInventory1 {
 	
 					// 4
 					// fixInventory Method
+					// by Arielle Evans
 	
 	public static void fixInventory(Scanner input, PrintWriter output) throws Exception {
 			
@@ -111,11 +116,12 @@ public class BookInventory1 {
 						{
 						    System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
 							bkArr[k].setISBN(userInput.nextLong());
+							System.out.println();
 						}
 						catch (InputMismatchException e){
 							
 							userInput.nextLine();
-							System.out.println("I'm sorry, but that isn't a valid ISBN. \nPlease re-enter an appropriate ISBN.");
+							System.out.println("I'm sorry, but that isn't a valid ISBN. \nPlease re-enter an appropriate ISBN.\n");
 						}
 					
 					} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
@@ -130,6 +136,7 @@ public class BookInventory1 {
 	
 					// 5
 					// displayFileContents method
+					// by Kyla Lea
 
 	public static void displayFileContents(Scanner stream) {
 		while(stream.hasNextLong()) {
@@ -140,6 +147,8 @@ public class BookInventory1 {
 	
 				// 3
 				// static bkArr Declaration
+				// by Arielle Evans
+	
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
 
