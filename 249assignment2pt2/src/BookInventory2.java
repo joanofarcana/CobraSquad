@@ -22,7 +22,9 @@ public class BookInventory2 {
 	 * 
 	 * 
 	 */
-					// 1
+	 
+	 boolean yesAddNew = true;
+						// 1
 						// addRecords Method
 						
 		 public static void addRecords(OutputStream outputStreamName)			 // ?????? why is this invalid /confused
