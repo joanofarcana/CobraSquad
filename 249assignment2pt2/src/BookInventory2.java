@@ -250,6 +250,7 @@ public class BookInventory2 {
             for(int j = 0; j< records; j++){
                 os.writeChars(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages()+"\n");
             }
+            os.close();
         }
         catch(Exception e2) {
             System.out.println("Could not output binary data");
