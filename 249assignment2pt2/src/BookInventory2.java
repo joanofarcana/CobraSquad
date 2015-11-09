@@ -42,10 +42,12 @@ public class BookInventory2 {
 						yesAddNew = kb.nextBoolean(); // determine how the user will input the boolean 
 						}
 					catch (FileNotFoundException e) {
+						kb.nextLine();
 						System.out.print("Error: File Not Found in addRecords().");
 						e.printStackTrace();; // exception message
 					}
 					catch (IOException e) {
+						kb.nextLine();
 						System.out.print("Error: IOException in addRecords().");
 						e.printStackTrace();
 					}
