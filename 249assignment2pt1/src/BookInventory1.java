@@ -152,6 +152,8 @@ public class BookInventory1 {
 		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
 		boolean validFileName = false;
+		Scanner oldFileDisplay = null;
+		Scanner newFileDisplay = null;
 				
 			// Welcome Message
 			System.out.println("============================================\n\n"
@@ -167,11 +169,13 @@ public class BookInventory1 {
 						validFileName = true;
 						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 						oldFileReader = new Scanner(oldFile);
-						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
+						fixInventory(oldFileReader, newFileWriter);
 						System.out.println("\n\nNow displaying contents of " + oldFile.getName() + ": \n");
-						displayFileContents(oldFileReader);
+						oldFileDisplay = new Scanner(oldFile);
+						displayFileContents(oldFileDisplay);
 						System.out.println("\n\nNow displaying contents of " + newFile.getName() + ": \n");
-						displayFileContents(newFileWriter);
+						newFileDisplay = new Scanner(newFile);
+						displayFileContents(newFileDisplay);
 					}
 					catch (IOException e) {
 						System.out.println("IOException in the main.");
