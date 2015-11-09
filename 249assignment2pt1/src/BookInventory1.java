@@ -107,8 +107,17 @@ public class BookInventory1 {
 			for (int k = j + 1; k < records; k++) {
 				if (bkArr[k].getISBN() == isbn) {
 					do {
-						System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
-						bkArr[k].setISBN(userInput.nextLong());				
+						try
+						{
+						    System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
+							bkArr[k].setISBN(userInput.nextLong());
+						}
+						catch (InputMismatchException e){
+							
+							userInput.nextLine();
+							System.out.println("I'm sorry, but that isn't a valid ISBN. \nPlease re-enter an appropriate ISBN.");
+						}
+					
 					} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
 				}
 			}
@@ -122,12 +131,11 @@ public class BookInventory1 {
 					// 5
 					// displayFileContents method
 
-		public static void displayFileContents(Scanner stream) {
-		Scanner contentScanner = stream;
-		while(contentScanner.hasNextLong()) {
-				System.out.println(contentScanner.nextLine());
+	public static void displayFileContents(Scanner stream) {
+		while(stream.hasNextLong()) {
+				System.out.println(stream.nextLine());
 		}
-		contentScanner.close();
+		stream.close();
 	}
 	
 				// 3
@@ -153,6 +161,8 @@ public class BookInventory1 {
 		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
 		boolean validFileName = false;
+		Scanner oldFileDisplay = null;
+		Scanner newFileDisplay = null;
 				
 			// Welcome Message
 			System.out.println("============================================\n\n"
@@ -168,11 +178,13 @@ public class BookInventory1 {
 						validFileName = true;
 						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 						oldFileReader = new Scanner(oldFile);
-						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
+						fixInventory(oldFileReader, newFileWriter);
 						System.out.println("\n\nNow displaying contents of " + oldFile.getName() + ": \n");
-						displayFileContents(oldFileReader);
+						oldFileDisplay = new Scanner(oldFile);
+						displayFileContents(oldFileDisplay);
 						System.out.println("\n\nNow displaying contents of " + newFile.getName() + ": \n");
-						displayFileContents(newFileReader);
+						newFileDisplay = new Scanner(newFile);
+						displayFileContents(newFileDisplay);
 					}
 					catch (IOException e) {
 						System.out.println("IOException in the main.");

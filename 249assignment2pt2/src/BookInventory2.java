@@ -26,10 +26,11 @@ public class BookInventory2 {
 	
 						// 1
 						// addRecords Method
+						// by Kyla Lea
 						
 		public static void addRecords(File outputStreamName) {			 // ?????? why is this invalid /confused
 			Scanner kb = new Scanner(System.in);								// It shouldn't be.... o_o;
-			 boolean yesAddNew = true;
+			boolean yesAddNew = true;
 			DataOutputStream dataOut;
 			
 			System.out.println("Please enter new records you wish to append to the file: ");
@@ -58,6 +59,7 @@ public class BookInventory2 {
 
 				// 2
 				// displayFileContents()
+<<<<<<< HEAD
 	public static void displayFileContents(Scanner input) {
 		/** 
 
@@ -66,37 +68,44 @@ public class BookInventory2 {
 			Scanner contentScanner = new Scanner(file);
 			while(contentScanner.hasNextLong()) {
 					System.out.println(contentScanner.nextLine());
+=======
+				// by Kyla Lea
+	public static void displayFileContents(BufferedReader input) throws IOException {
+		
+			while(input.readLine() != null) {
+					System.out.println(input.readLine());
+>>>>>>> refs/remotes/origin/master
 			}
-			contentScanner.close();
-		} 
-		catch (FileNotFoundException e) {
-			System.out.print("displayFileContents() ");
-			e.printStackTrace();
-		} 
-
-		 **/
-	}
+			input.close();
+		}
 
 				// 3
 				// binaryBookSearch()
 				// by Nina Prentiss
 	public static void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
 		int count = 0;
-		while (start <= end) {
-			int mid = start + (end - start)/2;
-			count++;
-			if (arr[mid].getISBN() < isbn) {
-				start = mid + 1; 
-			}
-			else if (arr[mid].getISBN() > isbn) {
-				end = mid - 1;
-			}
-			else {
-				System.out.println("Took " + count + " iteration(s) to find book with ISBN #" + isbn + ".");
-				System.out.println(arr[mid].toString());
+		boolean isbnFound = false;
+		if (start >= 0 && start <= end && end < arr.length && arr != null) {
+			while (start <= end && !isbnFound) {
+				int mid = start + (end - start)/2;
+				count++;
+				if (arr[mid].getISBN() < isbn) {
+					start = mid + 1; 
+				}
+				else if (arr[mid].getISBN() > isbn) {
+					end = mid - 1;
+				}
+				else {
+					System.out.println("Took " + count + " iteration(s) to find book with ISBN #" + isbn + ".");
+					System.out.println(arr[mid].toString());
+					isbnFound = true;
+				}
+				
 			}
 		}
-		System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
+		if (isbnFound == false) {
+			System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
+		}
 	}
 	
 	public static int countBooks(File in) {
@@ -121,6 +130,7 @@ public class BookInventory2 {
 				// 4
 				// sequentialBookSearch()
 				// by Himmet Arican
+<<<<<<< HEAD
 	public static void sequentialBookSearch (Book[] b, int start, int end, long isbn) {
 		int iterations = 0;
 		if (end>b.length){
@@ -135,6 +145,43 @@ public class BookInventory2 {
 		}
 		System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn+".");
 	}
+=======
+    	public void SequentialSearch (Book[] b, int start, int end, int isbn) 
+    {   
+        int iterations = 0;
+        boolean wrongIndex = false;
+        boolean notFound = true;
+        
+        if (end>b.length)
+        {
+            System.out.println("The end index is too big!");
+            wrongIndex = true;
+        }
+            else 
+            {   
+                while(notFound)
+                for (int i=start ; i<end; i++) 
+                {   
+                    iterations++;
+                    if (b[i].getISBN() == isbn)
+                    {
+                        notFound = false;
+                    }
+                }
+            }
+        
+        if (notFound == false && wrongIndex == false)
+        {
+            System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn);
+
+        }
+            else if(notFound == true && wrongIndex == false)
+            {
+                System.out.println("ISBN #" + isbn + " not found in " + iterations + " iterations.");
+            }
+        
+    }
+>>>>>>> refs/remotes/origin/master
 
 	static Book[] bkArr;
 	private static final File oldFile = new File("Sorted_Book_Info.txt");
