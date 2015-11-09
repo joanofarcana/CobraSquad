@@ -24,9 +24,9 @@ public class BookInventory2 {
 	 */
 	 
 	
-						// 1
-						// addRecords Method
-						// by Kyla Lea
+					// 1
+					// addRecords Method
+					// by Kyla Lea
 						
 		public static void addRecords(OutputStream outputStreamName) {			
 			Scanner kb = new Scanner(System.in);								
@@ -42,9 +42,11 @@ public class BookInventory2 {
 						yesAddNew = kb.nextBoolean(); // determine how the user will input the boolean 
 						}
 					catch (FileNotFoundException e) {
+						System.out.print("Error: File Not Found in addRecords().");
 						e.printStackTrace();; // exception message
 					}
 					catch (IOException e) {
+						System.out.print("Error: IOException in addRecords().");
 						e.printStackTrace();
 					}
 				} while(yesAddNew);
@@ -61,17 +63,18 @@ public class BookInventory2 {
 				// displayFileContents()
 				// by Kyla Lea
 	public static void displayFileContents(BufferedReader input) throws IOException {
-		
-			while(input.readLine() != null) {
-					System.out.println(input.readLine());
+			String nextLine = input.readLine();
+			while(nextLine != null) {
+				System.out.println(nextLine);
+				nextLine = input.readLine();
 			}
-			input.close();
+			input.reset();
 		}
 
 				// 3
 				// binaryBookSearch()
 				// by Nina Prentiss
-	public void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
+	public static void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
 		int count = 0;
 		boolean isbnFound = false;
 		if (start >= 0 && start <= end && end < arr.length && arr != null) {
@@ -100,8 +103,7 @@ public class BookInventory2 {
 				// 4
 				// sequentialBookSearch()
 				// by Himmet Arican
-    	public void SequentialSearch (Book[] b, int start, int end, int isbn) 
-    {   
+	public static void sequentialBookSearch (Book[] b, int start, int end, long isbn) {   
         int iterations = 0;
         boolean wrongIndex = false;
         boolean notFound = true;
@@ -135,9 +137,29 @@ public class BookInventory2 {
             }
         
     }
+    	
+			
+	public static int countBooks(File in) {
+		try {
+			Scanner input = new Scanner(in);
+			int numOfLines = 0;
+			while (input.hasNextLong()){
+				numOfLines++;
+			    input.nextLine();
+			}
+			input.close();
+			return numOfLines;
+		}
+		catch (Exception e) {
+			System.out.print("Error: Could not count books.");
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 
 	static Book[] bkArr;
-	private static final File oldFile = new File("Initial_Book_Info.txt");
+	private static final File oldFile = new File("Sorted_Book_Info.txt");
 
 	/* 
 	 * 
@@ -153,7 +175,7 @@ public class BookInventory2 {
 		// Declarations
 		
 		Scanner userInput = new Scanner(System.in);
-		Scanner oldFileReader = null;
+		BufferedReader oldFileReader = null;
 		// PrintWriter oldFileWriter = null;
 		DataOutputStream os = null;
 		long _ISBN, ISBN;
@@ -173,40 +195,56 @@ public class BookInventory2 {
 		
 		
 		//addRecords(oldFile);
-		displayFileContents(oldFileReader);
 		bkArr = new Book[records];
 		
 		try {
 	       	os = new DataOutputStream(new FileOutputStream("Books.dat"));
-			oldFileReader = new Scanner(oldFile);
+			oldFileReader = new BufferedReader(new FileReader(oldFile));
+			oldFileReader.mark(4096);
+			displayFileContents(oldFileReader);
 		} 
 		catch (Exception e) {
+			System.out.println("Error: Could not open files.");
 			e.printStackTrace();
 		}
 		
 		try {
 			for (int i = 0; i < records; i++) {
-	            if(oldFileReader.hasNextLong()) {
-			    	_ISBN = Long.parseLong(oldFileReader.next(), 10);
-			    	_title = oldFileReader.next();
-			    	_issueYear = Integer.parseInt(oldFileReader.next());
-			    	_author = oldFileReader.next();
-			    	_price = Double.parseDouble(oldFileReader.next());
-			    	_numberOfPages = Integer.parseInt(oldFileReader.next());
+				String item = oldFileReader.readLine();
+	            if (item != null) {
+	            		int index = item.indexOf(" ");
+			    	_ISBN = Long.parseLong(item.substring(0, index), 10);
+			    		item = item.substring(index + 1);
+			    		index = item.indexOf(" ");
+			    	_title = item.substring(0, index);
+			    		item = item.substring(index + 1);
+			    		index = item.indexOf(" ");
+			    	_issueYear = Integer.parseInt(item.substring(0, index));
+				    	item = item.substring(index + 1);
+				    	index = item.indexOf(" ");
+			    	_author = item.substring(0, index);
+				    	item = item.substring(index + 1);
+				    	index = item.indexOf(" ");
+			    	_price = Double.parseDouble(item.substring(0, index));
+			    		item = item.substring(index + 1);
+			    	_numberOfPages = Integer.parseInt(item);
+			    		
 				    
 				    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
 				}
 			}
 		}
 		catch(Exception e){
-		    System.out.println("Could not read records from file.");
+			System.out.println("Error: Could not read records from file.");
+			e.printStackTrace();
 		}
 		
 		System.out.println("Please enter the ISBN you want to find. ");
 		ISBN = userInput.nextLong();
 		
-		binaryBookSearch (bkArr, 0, records, ISBN);
-		sequentialBookSearch (bkArr, 0, records, ISBN);
+		System.out.println(records);
+		binaryBookSearch(bkArr, 0, records, ISBN);
+		sequentialBookSearch(bkArr, 0, records, ISBN);
 
         try {
             for(int j = 0; j< records; j++){
