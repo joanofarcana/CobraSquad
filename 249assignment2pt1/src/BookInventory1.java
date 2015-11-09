@@ -122,7 +122,7 @@ public class BookInventory1 {
 					// 5
 					// displayFileContents method
 
-		public static void displayFileContents(Scanner stream) {
+	public static void displayFileContents(Scanner stream) {
 		Scanner contentScanner = stream;
 		while(contentScanner.hasNextLong()) {
 				System.out.println(contentScanner.nextLine());
@@ -172,7 +172,7 @@ public class BookInventory1 {
 						System.out.println("\n\nNow displaying contents of " + oldFile.getName() + ": \n");
 						displayFileContents(oldFileReader);
 						System.out.println("\n\nNow displaying contents of " + newFile.getName() + ": \n");
-						displayFileContents(newFileReader);
+						displayFileContents(newFileWriter);
 					}
 					catch (IOException e) {
 						System.out.println("IOException in the main.");
