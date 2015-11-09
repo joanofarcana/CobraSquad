@@ -53,7 +53,7 @@ public class BookInventory2 {
 				System.out.println("You've decided //not// to continue adding records to the file.\n\n " +
 						"addRecords program segment has ended.");
 			}
-			dataOut.close(); 
+			kb.close(); 
 		}
 
 				// 2
@@ -137,7 +137,7 @@ public class BookInventory2 {
 	}
 
 	static Book[] bkArr;
-	private static final File oldFile = new File("Initial_Book_Info.txt");
+	private static final File oldFile = new File("Sorted_Book_Info.txt");
 
 	/* 
 	 * 
@@ -154,16 +154,16 @@ public class BookInventory2 {
 		
 		Scanner userInput = new Scanner(System.in);
 		Scanner oldFileReader = null;
-		PrintWriter oldFileWriter = null;
-				oldFileReader = new Scanner(oldFile);
+		// PrintWriter oldFileWriter = null;
+		DataOutputStream os = null;
 		long _ISBN, ISBN;
 		String _title;
 		int _issueYear;
 		String _author;
 		double _price;
-		int _numberOfPages;
+		int _numberOfPages; 
 		
-		boolean validFileName = false;
+		// boolean validFileName = false;
 		int records = countBooks(oldFile);
 
 			// Welcome Message
@@ -172,25 +172,33 @@ public class BookInventory2 {
 							+ "============================================\n");
 		
 		
-		addRecords(oldFile);
+		//addRecords(oldFile);
 		displayFileContents(oldFileReader);
 		bkArr = new Book[records];
 		
-
-		try{
-		for (int i = 0; i < records; i++) {
-            if(oldFileReader.hasNextLong()) {
-		    	_ISBN = Long.parseLong(oldFileReader.next(), 10);
-		    	_title = oldFileReader.next();
-		    	_issueYear = Integer.parseInt(oldFileReader.next());
-		    	_author = oldFileReader.next();
-		    	_price = Double.parseDouble(oldFileReader.next());
-		    	_numberOfPages = Integer.parseInt(oldFileReader.next());
-			    
-			    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
+		try {
+	       	os = new DataOutputStream(new FileOutputStream("Books.dat"));
+			oldFileReader = new Scanner(oldFile);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			for (int i = 0; i < records; i++) {
+	            if(oldFileReader.hasNextLong()) {
+			    	_ISBN = Long.parseLong(oldFileReader.next(), 10);
+			    	_title = oldFileReader.next();
+			    	_issueYear = Integer.parseInt(oldFileReader.next());
+			    	_author = oldFileReader.next();
+			    	_price = Double.parseDouble(oldFileReader.next());
+			    	_numberOfPages = Integer.parseInt(oldFileReader.next());
+				    
+				    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
+				}
 			}
 		}
-		}catch(Exception e){
+		catch(Exception e){
 		    System.out.println("Could not read records from file.");
 		}
 		
@@ -199,26 +207,28 @@ public class BookInventory2 {
 		
 		binaryBookSearch (bkArr, 0, records, ISBN);
 		sequentialBookSearch (bkArr, 0, records, ISBN);
-        DataOutputStream os = new DataOutputStream(new FileOutputStream("Books.dat"));
 
         try {
             for(int j = 0; j< records; j++){
                 os.writeChars(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages()+"\n");
             }
-        } catch(Exception e2){
+        }
+        catch(Exception e2) {
             System.out.println("Could not output binary data");
-        }finally {
+        }
+        finally {
             // Make sure to close the file when done
-            os.close();
+        	userInput.close();
         }
         
     
 		System.out.println("\n============================================\n\n"
 							+ "Thank you for using the Library Inventory Program!\n\n"
 							+ "============================================\n");
-					}
+	}
 				
-			}
+}
+
 		 
 	
 
