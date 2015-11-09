@@ -77,7 +77,7 @@ public class BookInventory2 {
 	public static void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
 		int count = 0;
 		boolean isbnFound = false;
-		if (start >= 0 && start <= end && end < arr.length && arr != null) {
+		if (start >= 0 && start <= end && end <= arr.length && arr != null) {
 			while (start <= end && !isbnFound) {
 				int mid = start + (end - start)/2;
 				count++;
@@ -242,7 +242,6 @@ public class BookInventory2 {
 		System.out.println("Please enter the ISBN you want to find. ");
 		ISBN = userInput.nextLong();
 		
-		System.out.println(records);
 		binaryBookSearch(bkArr, 0, records, ISBN);
 		sequentialBookSearch(bkArr, 0, records, ISBN);
 
