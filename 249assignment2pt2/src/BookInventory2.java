@@ -15,25 +15,25 @@ import java.io.*;
 
 
 public class BookInventory2 {
-	
-/* 
- * 
- * +++++++BookInventory2 Class Methods+++++++
- * 
- * 
- */
-	
+
+	/* 
+	 * 
+	 * +++++++BookInventory2 Class Methods+++++++
+	 * 
+	 * 
+	 */
+
 				// 1
 				// addRecords()
 	public void addRecords(FileOutputStream output) {
-		
+
 	}
-				
+
 				// 2
 				// displayFileContents()
 	public static void displayFileContents(BufferedReader input) {
 		/** 
-		
+
 		System.out.println("\n\nNow displaying contents of " + file.getName() + ": \n");
 		try {
 			Scanner contentScanner = new Scanner(file);
@@ -46,12 +46,13 @@ public class BookInventory2 {
 			System.out.print("displayFileContents() ");
 			e.printStackTrace();
 		} 
-		
-		**/
+
+		 **/
 	}
 
 				// 3
 				// binaryBookSearch()
+				// by Nina Prentiss
 	public void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
 		int count = 0;
 		while (start <= end) {
@@ -70,26 +71,25 @@ public class BookInventory2 {
 		}
 		System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
 	}
-	
-	public void SequentialSearch (Book[] b, int start, int end, int isbn) 
-    {   int iterations = 0;       
-        if (end>b.length)
-        {
-            System.out.println("The end index is too big!");
-        }
-            else 
-            {
-                for (int i=start ; i<end; i++) 
-                {     
-                    if (b[i].getISBN() == isbn)
-                    {
-                        iterations++;
-                    }
-                }
-            }
-        System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn+".");
-    }
-	
+
+				// 4
+				// sequentialBookSearch()
+				// by Himmet Arican
+	public void sequentialBookSearch (Book[] b, int start, int end, int isbn) {
+		int iterations = 0;
+		if (end>b.length){
+			System.out.println("The end index is too big!");
+		}
+		else {
+			for (int i=start ; i<end; i++) {     
+				if (b[i].getISBN() == isbn) {
+					iterations++;
+				}
+			}
+		}
+		System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn+".");
+	}
+
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
 
@@ -99,25 +99,25 @@ public class BookInventory2 {
 	 * 
 	 * 
 	 */
-	
-	
+
+
 	public static void main(String[] args) {
-		
+
 		/**
 		// Declarations
 		bkArr = new Book[countBooks(oldFile)];
-		
+
 		File newFile = null;
 		Scanner userInput = new Scanner(System.in);
 		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
 		boolean validFileName = false;
-				
+
 			// Welcome Message
 			System.out.println("============================================\n\n"
 							+ "Welcome to the Library Inventory Program!\n\n"
 							+ "============================================\n");
-			
+
 			// User Input
 			while (!validFileName) {
 				System.out.println("Please enter a file name in which to save new modified inventory.");
@@ -153,6 +153,6 @@ public class BookInventory2 {
 					System.out.println("An error occurred. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
 				}
 			}
-		**/
+		 **/
 	}
 }
