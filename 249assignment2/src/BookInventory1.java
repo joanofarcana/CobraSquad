@@ -9,8 +9,6 @@
 // For COMP249 Section: (Substitute your section letter(s))
 // ---------------------------------------------------------------
 
-package assignment2;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
@@ -136,9 +134,9 @@ public class BookInventory1 {
 					// displayFileContents method
 
 	
-	public static void displayFileContents(Scanner stream) {
+	public static void displayFileContents(Scanner stream, String name) {
 		Scanner contentScanner = stream;
-		System.out.println("\n\nNow displaying contents of " + file.getName() + ": \n"); // how to derive filename from scanner input stream
+		System.out.println("\n\nNow displaying contents of " + name + ": \n"); // how to derive filename from scanner input stream
 		while(contentScanner.hasNextLong()) {
 				System.out.println(contentScanner.nextLine());
 		}
@@ -151,6 +149,7 @@ public class BookInventory1 {
 	
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
+	static String oldFileName = oldFile.getName();
 
 	/* 
 	 * 
@@ -166,6 +165,7 @@ public class BookInventory1 {
 		bkArr = new Book[countBooks(oldFile)];
 		
 		File newFile = null;
+		String newFileName;
 		Scanner userInput = new Scanner(System.in);
 		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
@@ -180,6 +180,7 @@ public class BookInventory1 {
 			while (!validFileName) {
 				System.out.println("Please enter a file name in which to save new modified inventory.");
 				newFile = new File(userInput.nextLine());
+				newFileName = newFile.getName();
 				if (!newFile.exists()){
 					try {
 						validFileName = true;
@@ -187,8 +188,8 @@ public class BookInventory1 {
 						oldFileReader = new Scanner(oldFile);
 						Scanner newFileReader = new Scanner(newFile);
 						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
-						displayFileContents(oldFileReader);
-						displayFileContents(newFileReader);
+						displayFileContents(oldFileReader, oldFileName);
+						displayFileContents(newFileReader, newFileName);
 					}
 					catch (IOException e) {
 						System.out.println("IOException in the main.");
