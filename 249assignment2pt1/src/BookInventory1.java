@@ -156,7 +156,8 @@ public class BookInventory1 {
 	 * 
 	 * =================== MAIN PROGRAM ======================= 
 	 * 
-	 * 
+	 *   compiled courtesy of : Eclipse and Nina Prentiss (:3)
+	 *    
 	 */
 	
 	
