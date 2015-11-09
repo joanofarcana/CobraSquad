@@ -26,6 +26,7 @@ public class BookInventory2 {
 	
 						// 1
 						// addRecords Method
+						// by Kyla Lea
 						
 		public static void addRecords(OutputStream outputStreamName) {			 // ?????? why is this invalid /confused
 			Scanner kb = new Scanner(System.in);								// It shouldn't be.... o_o;
@@ -53,7 +54,7 @@ public class BookInventory2 {
 				System.out.println("You've decided //not// to continue adding records to the file.\n\n " +
 						"addRecords program segment has ended.");
 			}
-			dataOut.close(); 
+			//dataOut.close(); 
 		}
 
 				// 2
@@ -82,21 +83,28 @@ public class BookInventory2 {
 				// by Nina Prentiss
 	public void binaryBookSearch(Book[] arr, int start, int end, long isbn) {
 		int count = 0;
-		while (start <= end) {
-			int mid = start + (end - start)/2;
-			count++;
-			if (arr[mid].getISBN() < isbn) {
-				start = mid + 1; 
-			}
-			else if (arr[mid].getISBN() > isbn) {
-				end = mid - 1;
-			}
-			else {
-				System.out.println("Took " + count + " iteration(s) to find book with ISBN #" + isbn + ".");
-				System.out.println(arr[mid].toString());
+		boolean isbnFound = false;
+		if (start >= 0 && start <= end && end < arr.length && arr != null) {
+			while (start <= end && !isbnFound) {
+				int mid = start + (end - start)/2;
+				count++;
+				if (arr[mid].getISBN() < isbn) {
+					start = mid + 1; 
+				}
+				else if (arr[mid].getISBN() > isbn) {
+					end = mid - 1;
+				}
+				else {
+					System.out.println("Took " + count + " iteration(s) to find book with ISBN #" + isbn + ".");
+					System.out.println(arr[mid].toString());
+					isbnFound = true;
+				}
+				
 			}
 		}
-		System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
+		if (isbnFound == false) {
+			System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
+		}
 	}
 
 				// 4
