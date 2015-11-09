@@ -153,6 +153,7 @@ public class BookInventory2 {
 			return numOfLines;
 		}
 		catch (Exception e) {
+			input.nextLine();
 			System.out.print("Error: Could not count books.");
 			e.printStackTrace();
 			return 0;
@@ -206,6 +207,7 @@ public class BookInventory2 {
 			displayFileContents(oldFileReader);
 		} 
 		catch (Exception e) {
+		
 			System.out.println("Error: Could not open files.");
 			e.printStackTrace();
 		}
