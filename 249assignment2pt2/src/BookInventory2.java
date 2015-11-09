@@ -30,7 +30,7 @@ public class BookInventory2 {
 						
 		public static void addRecords(OutputStream outputStreamName) {			 // ?????? why is this invalid /confused
 			Scanner kb = new Scanner(System.in);								// It shouldn't be.... o_o;
-			 boolean yesAddNew = true;
+			boolean yesAddNew = true;
 			DataOutputStream dataOut;
 			
 			System.out.println("Please enter new records you wish to append to the file: ");
@@ -54,7 +54,7 @@ public class BookInventory2 {
 				System.out.println("You've decided //not// to continue adding records to the file.\n\n " +
 						"addRecords program segment has ended.");
 			}
-			//dataOut.close(); 
+			kb.close(); 
 		}
 
 				// 2
