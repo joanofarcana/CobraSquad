@@ -64,7 +64,7 @@ public class BookInventory2 {
 				end = mid - 1;
 			}
 			else {
-				System.out.println("Took " + count + " iterations to find book with isbn #" + isbn + ".");
+				System.out.println("Took " + count + " iteration(s) to find book with ISBN #" + isbn + ".");
 				System.out.println(arr[mid].toString());
 			}
 		}
@@ -87,7 +87,7 @@ public class BookInventory2 {
                     }
                 }
             }
-        System.out.println("It took " + iterations + " iteration to find the book with ISBN "+isbn);
+        System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn+".");
     }
 	
 	static Book[] bkArr;
