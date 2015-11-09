@@ -1,12 +1,12 @@
 // ---------------------------------------------------------------
 // Assignment 2
-// Question: 1
+// Part 1
 // Written by:	Nina Prentiss		26270611
 //				Kyla Lea			21280090
 //				Arielle Evans		27380267
 //				Himmet Arican		27533934
 //
-// For COMP249 Section: (Substitute your section letter(s))
+// For COMP249 
 // ---------------------------------------------------------------
 
 
