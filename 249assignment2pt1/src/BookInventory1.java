@@ -107,8 +107,17 @@ public class BookInventory1 {
 			for (int k = j + 1; k < records; k++) {
 				if (bkArr[k].getISBN() == isbn) {
 					do {
-						System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
-						bkArr[k].setISBN(userInput.nextLong());				
+						try
+						{
+						    System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
+							bkArr[k].setISBN(userInput.nextLong());
+						}
+						catch (InputMismatchException e){
+							
+							userInput.nextLine();
+							System.out.println("I'm sorry, but that isn't a valid ISBN. \nPlease re-enter an appropriate ISBN.");
+						}
+					
 					} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
 				}
 			}
