@@ -9,6 +9,7 @@
 // For COMP249 Section: (Substitute your section letter(s))
 // ---------------------------------------------------------------
 
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.*;
@@ -55,6 +56,8 @@ public class BookInventory1 {
 		}
 		return false;
 	}
+
+	
 	
 					// 4
 					// fixInventory Method
@@ -102,7 +105,6 @@ public class BookInventory1 {
 
 		for (int j = 0; j < records; j++) {
 			long isbn = bkArr[j].getISBN();
-			long llong; ///////////////
 			for (int k = j + 1; k < records; k++) {
 				if (bkArr[k].getISBN() == isbn) {
 					do {
@@ -112,12 +114,9 @@ public class BookInventory1 {
 							bkArr[k].setISBN(userInput.nextLong());
 						}
 						catch (InputMismatchException e){
-						
-						}
-						finally
-						{
+							
+							userInput.nextLine();
 							System.out.println("I'm sorry, but that isn't a valid ISBN. \nPlease re-enter an appropriate ISBN.");
-							bkArr[k].setISBN(userInput.nextLong());
 						}
 					
 					} while (checkDuplicate(bkArr, bkArr[k].getISBN(), k));
@@ -133,23 +132,17 @@ public class BookInventory1 {
 					// 5
 					// displayFileContents method
 
-	
-	public static void displayFileContents(Scanner stream, String name) {
-		Scanner contentScanner = stream;
-		System.out.println("\n\nNow displaying contents of " + name + ": \n"); // how to derive filename from scanner input stream
-		while(contentScanner.hasNextLong()) {
-				System.out.println(contentScanner.nextLine());
+	public static void displayFileContents(Scanner stream) {
+		while(stream.hasNextLong()) {
+				System.out.println(stream.nextLine());
 		}
-		contentScanner.close();
+		stream.close();
 	}
 	
-
 				// 3
 				// static bkArr Declaration
-	
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
-	static String oldFileName = oldFile.getName();
 
 	/* 
 	 * 
@@ -165,11 +158,12 @@ public class BookInventory1 {
 		bkArr = new Book[countBooks(oldFile)];
 		
 		File newFile = null;
-		String newFileName;
 		Scanner userInput = new Scanner(System.in);
 		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
 		boolean validFileName = false;
+		Scanner oldFileDisplay = null;
+		Scanner newFileDisplay = null;
 				
 			// Welcome Message
 			System.out.println("============================================\n\n"
@@ -180,16 +174,18 @@ public class BookInventory1 {
 			while (!validFileName) {
 				System.out.println("Please enter a file name in which to save new modified inventory.");
 				newFile = new File(userInput.nextLine());
-				newFileName = newFile.getName();
 				if (!newFile.exists()){
 					try {
 						validFileName = true;
 						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
 						oldFileReader = new Scanner(oldFile);
-						Scanner newFileReader = new Scanner(newFile);
-						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
-						displayFileContents(oldFileReader, oldFileName);
-						displayFileContents(newFileReader, newFileName);
+						fixInventory(oldFileReader, newFileWriter);
+						System.out.println("\n\nNow displaying contents of " + oldFile.getName() + ": \n");
+						oldFileDisplay = new Scanner(oldFile);
+						displayFileContents(oldFileDisplay);
+						System.out.println("\n\nNow displaying contents of " + newFile.getName() + ": \n");
+						newFileDisplay = new Scanner(newFile);
+						displayFileContents(newFileDisplay);
 					}
 					catch (IOException e) {
 						System.out.println("IOException in the main.");
