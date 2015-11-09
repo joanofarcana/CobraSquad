@@ -22,12 +22,36 @@ public class BookInventory2 {
 	 * 
 	 * 
 	 */
-
-				// 1
-				// addRecords()
-	public void addRecords(FileOutputStream output) {
-
-	}
+					// 1
+						// addRecords Method
+						
+		 public static void addRecords(OutputStream outputStreamName)			 // ?????? why is this invalid /confused
+		{
+			Scanner kb = new Scanner(System.in);
+			
+			DataOutputStream dataOut = new DataOutputStream(new FileOutputStream("newFile.dat"));
+			
+			System.out.println("Please enter new records you wish to append to the file: ");
+				do
+				{
+					try{
+						dataOut.writeUTF(kb.nextLine()); // however one appends records to file
+							System.out.println("Your record has been successfully appended!/n Do you wish to add a new record?");
+						kb.nextBoolean(); // determine how the user will input the boolean 
+						}
+					catch (FileNotFoundException e)
+					{
+						; // exception message
+					}
+				} while(yesAddNew);
+			
+			if (!yesAddNew)
+			{
+				System.out.println("You've decided //not// to continue adding records to the file./n " +
+						"addRecords program segment has ended.");
+				dataOut.close(); 
+			}
+		}
 
 				// 2
 				// displayFileContents()
