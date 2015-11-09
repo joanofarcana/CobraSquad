@@ -176,7 +176,7 @@ public class BookInventory2 {
 		
 		Scanner userInput = new Scanner(System.in);
 		BufferedReader oldFileReader = null;
-		// PrintWriter oldFileWriter = null;
+		FileOutputStream oldFileWriter = null;
 		DataOutputStream os = null;
 		long _ISBN, ISBN;
 		String _title;
@@ -185,7 +185,6 @@ public class BookInventory2 {
 		double _price;
 		int _numberOfPages; 
 		
-		// boolean validFileName = false;
 		int records = countBooks(oldFile);
 
 			// Welcome Message
@@ -194,17 +193,22 @@ public class BookInventory2 {
 							+ "============================================\n");
 		
 		
-		//addRecords(oldFile);
 		bkArr = new Book[records];
 		
 		try {
 	       	os = new DataOutputStream(new FileOutputStream("Books.dat"));
 			oldFileReader = new BufferedReader(new FileReader(oldFile));
 			oldFileReader.mark(4096);
+			oldFileWriter = new FileOutputStream(oldFile);
+			addRecords(oldFileWriter);
 			displayFileContents(oldFileReader);
 		} 
-		catch (Exception e) {
+		catch (FileNotFoundException e) {
 			System.out.println("Error: Could not open files.");
+			e.printStackTrace();
+		}
+		catch (IOException e){
+			System.out.println("Error: Could not set mark. Or, could not display contents.");
 			e.printStackTrace();
 		}
 		
