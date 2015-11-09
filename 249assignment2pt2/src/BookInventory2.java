@@ -149,56 +149,81 @@ public class BookInventory2 {
 
 	public static void main(String[] args) {
 
-		/**
+		
 		// Declarations
-		bkArr = new Book[countBooks(oldFile)];
-
-		File newFile = null;
+		
 		Scanner userInput = new Scanner(System.in);
-		PrintWriter newFileWriter = null;
 		Scanner oldFileReader = null;
-		boolean validFileName = false;
+		// PrintWriter oldFileWriter = null;
+		DataOutputStream os = null;
+		long _ISBN, ISBN;
+		String _title;
+		int _issueYear;
+		String _author;
+		double _price;
+		int _numberOfPages; 
+		
+		// boolean validFileName = false;
+		int records = countBooks(oldFile);
 
 			// Welcome Message
 			System.out.println("============================================\n\n"
 							+ "Welcome to the Library Inventory Program!\n\n"
 							+ "============================================\n");
-
-			// User Input
-			while (!validFileName) {
-				System.out.println("Please enter a file name in which to save new modified inventory.");
-				newFile = new File(userInput.nextLine());
-				if (!newFile.exists()){
-					try {
-						validFileName = true;
-						newFileWriter = new PrintWriter(new FileOutputStream(newFile));
-						oldFileReader = new Scanner(oldFile);
-						System.out.println(oldFileReader.toString());
-						fixInventory(oldFileReader, newFileWriter); // fixInventory should accept two streams
-						displayFileContents(oldFile);
-						displayFileContents(newFile);
-					}
-					catch (IOException e) {
-						System.out.println("IOException in the main.");
-						System.out.println(e.getMessage());
-					}
-					catch (Exception e) {
-						System.out.println("Other Exception in the main.");
-						System.out.println(e.getMessage());
-						e.printStackTrace();
-					}
-					finally {
-						newFileWriter.close();
-						userInput.close();
-						System.out.println("\n============================================\n\n"
-							+ "Thank you for using the Library Inventory Program!\n\n"
-							+ "============================================\n");
-					}
-				}
-				else {
-					System.out.println("An error occurred. A " + newFile.length() + " byte file with the name \"" + newFile.getName() + "\" already exists.");
+		
+		
+		//addRecords(oldFile);
+		displayFileContents(oldFileReader);
+		bkArr = new Book[records];
+		
+		try {
+	       	os = new DataOutputStream(new FileOutputStream("Books.dat"));
+			oldFileReader = new Scanner(oldFile);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			for (int i = 0; i < records; i++) {
+	            if(oldFileReader.hasNextLong()) {
+			    	_ISBN = Long.parseLong(oldFileReader.next(), 10);
+			    	_title = oldFileReader.next();
+			    	_issueYear = Integer.parseInt(oldFileReader.next());
+			    	_author = oldFileReader.next();
+			    	_price = Double.parseDouble(oldFileReader.next());
+			    	_numberOfPages = Integer.parseInt(oldFileReader.next());
+				    
+				    bkArr[i] = new Book(_ISBN, _title, _issueYear, _author, _price, _numberOfPages);
 				}
 			}
-		 **/
+		}
+		catch(Exception e){
+		    System.out.println("Could not read records from file.");
+		}
+		
+		System.out.println("Please enter the ISBN you want to find. ");
+		ISBN = userInput.nextLong();
+		
+		binaryBookSearch (bkArr, 0, records, ISBN);
+		sequentialBookSearch (bkArr, 0, records, ISBN);
+
+        try {
+            for(int j = 0; j< records; j++){
+                os.writeChars(bkArr[j].getISBN()+" "+bkArr[j].getTitle()+" "+bkArr[j].getIssueYear()+" "+bkArr[j].getAuthor()+" "+bkArr[j].getPrice()+" "+bkArr[j].getNumberOfPages()+"\n");
+            }
+        }
+        catch(Exception e2) {
+            System.out.println("Could not output binary data");
+        }
+        finally {
+            // Make sure to close the file when done
+        	userInput.close();
+        }
+        
+    
+		System.out.println("\n============================================\n\n"
+							+ "Thank you for using the Library Inventory Program!\n\n"
+							+ "============================================\n");
 	}
 }
