@@ -71,6 +71,25 @@ public class BookInventory2 {
 		System.out.println("ISBN #" + isbn + " not found in " + count + " iterations.");
 	}
 	
+	public void SequentialSearch (Book[] b, int start, int end, int isbn) 
+    {   int iterations = 0;       
+        if (end>b.length)
+        {
+            System.out.println("The end index is too big!");
+        }
+            else 
+            {
+                for (int i=start ; i<end; i++) 
+                {     
+                    if (b[i].getISBN() == isbn)
+                    {
+                        iterations++;
+                    }
+                }
+            }
+        System.out.println("It took " + iterations + " iteration to find the book with ISBN "+isbn);
+    }
+	
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
 
