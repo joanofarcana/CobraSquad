@@ -115,7 +115,7 @@ public class BookInventory1 {
 						try
 						{
 						    System.out.println("ISBN error found. Please enter a new isbn for "+bkArr[k].getTitle()+" "+bkArr[k].getISBN()+": ");
-							bkArr[k].setISBN(userInput.nextLong());
+							bkArr[k].setISBN(userInput.nextLong(10));
 							System.out.println();
 						}
 						catch (InputMismatchException e){
