@@ -38,18 +38,18 @@ public class BookInventory2 {
 				{
 					try{
 						dataOut.writeUTF(kb.nextLine()); // however one appends records to file
-							System.out.println("Your record has been successfully appended!/n Do you wish to add a new record?");
+							System.out.println("Your record has been successfully appended!\n\nDo you wish to add a new record?");
 						yesAddNew = kb.nextBoolean(); // determine how the user will input the boolean 
 						}
 					catch (FileNotFoundException e)
 					{
 						; // exception message
 					}
-				} while(yesAddNew);
+				} while(true);
 			
 			if (!yesAddNew)
 			{
-				System.out.println("You've decided //not// to continue adding records to the file./n " +
+				System.out.println("You've decided //not// to continue adding records to the file.\n\n " +
 						"addRecords program segment has ended.");
 				dataOut.close(); 
 			}
