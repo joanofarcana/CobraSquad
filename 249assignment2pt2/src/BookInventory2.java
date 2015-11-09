@@ -28,8 +28,8 @@ public class BookInventory2 {
 						// addRecords Method
 						// by Kyla Lea
 						
-		public static void addRecords(OutputStream outputStreamName) {			 // ?????? why is this invalid /confused
-			Scanner kb = new Scanner(System.in);								// It shouldn't be.... o_o;
+		public static void addRecords(OutputStream outputStreamName) {			
+			Scanner kb = new Scanner(System.in);								
 			boolean yesAddNew = true;
 			DataOutputStream dataOut;
 			
