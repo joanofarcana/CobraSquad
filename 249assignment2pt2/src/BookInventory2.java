@@ -59,24 +59,14 @@ public class BookInventory2 {
 
 				// 2
 				// displayFileContents()
-	public static void displayFileContents(BufferedReader input) {
-		/** 
-
-		System.out.println("\n\nNow displaying contents of " + file.getName() + ": \n");
-		try {
-			Scanner contentScanner = new Scanner(file);
-			while(contentScanner.hasNextLong()) {
-					System.out.println(contentScanner.nextLine());
+				// by Kyla Lea
+	public static void displayFileContents(BufferedReader input) throws IOException {
+		
+			while(input.readLine() != null) {
+					System.out.println(input.readLine());
 			}
-			contentScanner.close();
-		} 
-		catch (FileNotFoundException e) {
-			System.out.print("displayFileContents() ");
-			e.printStackTrace();
-		} 
-
-		 **/
-	}
+			input.close();
+		}
 
 				// 3
 				// binaryBookSearch()
