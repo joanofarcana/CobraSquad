@@ -23,14 +23,14 @@ public class BookInventory2 {
 	 * 
 	 */
 	 
-	 boolean yesAddNew = true;
+	
 						// 1
 						// addRecords Method
 						
 		 public static void addRecords(OutputStream outputStreamName)			 // ?????? why is this invalid /confused
 		{
 			Scanner kb = new Scanner(System.in);
-			
+			 boolean yesAddNew = true;
 			DataOutputStream dataOut = new DataOutputStream(new FileOutputStream("newFile.dat"));
 			
 			System.out.println("Please enter new records you wish to append to the file: ");
@@ -39,7 +39,7 @@ public class BookInventory2 {
 					try{
 						dataOut.writeUTF(kb.nextLine()); // however one appends records to file
 							System.out.println("Your record has been successfully appended!/n Do you wish to add a new record?");
-						kb.nextBoolean(); // determine how the user will input the boolean 
+						yesAddNew = kb.nextBoolean(); // determine how the user will input the boolean 
 						}
 					catch (FileNotFoundException e)
 					{
