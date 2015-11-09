@@ -102,20 +102,41 @@ public class BookInventory2 {
 				// 4
 				// sequentialBookSearch()
 				// by Himmet Arican
-	public void sequentialBookSearch (Book[] b, int start, int end, int isbn) {
-		int iterations = 0;
-		if (end>b.length){
-			System.out.println("The end index is too big!");
-		}
-		else {
-			for (int i=start ; i<end; i++) {     
-				if (b[i].getISBN() == isbn) {
-					iterations++;
-				}
-			}
-		}
-		System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn+".");
-	}
+    	public void SequentialSearch (Book[] b, int start, int end, int isbn) 
+    {   
+        int iterations = 0;
+        boolean wrongIndex = false;
+        boolean notFound = true;
+        
+        if (end>b.length)
+        {
+            System.out.println("The end index is too big!");
+            wrongIndex = true;
+        }
+            else 
+            {   
+                while(notFound)
+                for (int i=start ; i<end; i++) 
+                {   
+                    iterations++;
+                    if (b[i].getISBN() == isbn)
+                    {
+                        notFound = false;
+                    }
+                }
+            }
+        
+        if (notFound == false && wrongIndex == false)
+        {
+            System.out.println("It took " + iterations + " iteration(s) to find the book with ISBN #"+isbn);
+
+        }
+            else if(notFound == true && wrongIndex == false)
+            {
+                System.out.println("ISBN #" + isbn + " not found in " + iterations + " iterations.");
+            }
+        
+    }
 
 	static Book[] bkArr;
 	private static final File oldFile = new File("Initial_Book_Info.txt");
