@@ -13,7 +13,6 @@ public class CellListUtilization {
 
 	public static void main(String[] args) {
 		// TODO test constructors/methods of classes, use special cases
-		// TODO Goodbye Message
 		
 		// Important Attributes
 		String fileName = "Cell_Info.txt";
@@ -32,6 +31,7 @@ public class CellListUtilization {
 		CellList list2 = new CellList();
 		
 		System.out.println("Now reading " + fileName + "...");
+		
 		
 		// Open Cell_Info.txt and read its contents, assigning values to list1
 		try {
@@ -59,22 +59,25 @@ public class CellListUtilization {
 				}
 				else {
 					cont = false;
-					System.out.println("Finished reading " + fileName + ".\n");
+					System.out.println("Finished reading " + fileName + ".");
+					System.out.println();
 				}
 			}
 			bufferedReader.close();
 			
+			
 			// Shows contents of list1
 			list1.showContents();
+			System.out.println();
 			
 			
 			// Search list1 for user-inputed serial numbers
 			BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
 			String userInput;
-			String no = "N";
-			System.out.println("Let's search for a serial number.");
 			long userSerial;
+			int searchCount = 0;
 			cont = true;
+			System.out.println("Let's search for a serial number.");
 			while (cont) {
 				System.out.print("Please enter a serial number to search for: ");
 				userSerial = Long.parseLong(keyboard.readLine());
@@ -85,16 +88,24 @@ public class CellListUtilization {
 				else {
 					System.out.println("Serial number not found.");
 				}
+				searchCount++;
 				
 				System.out.print("Would you like to search for another serial number? (Y/N) ");
 				userInput = keyboard.readLine();
 				if (userInput.equalsIgnoreCase("n") || userInput.equalsIgnoreCase("no")) {
 					cont = false;
+					System.out.println("Searched " + searchCount + " time(s).");
 				}
+				
+				
+				// Playing with Accessors and Mutators
+				
+				
 			}
 		}
 		catch (FileNotFoundException e) {
-			System.out.println(e);
+			System.out.println("The selected file could not be found.");
+			System.out.println("The program will now terminate.");
 		}
 		catch (IOException e) {
 			System.out.println(e);
@@ -102,7 +113,8 @@ public class CellListUtilization {
 		
 		
 		// Goodbye Message
-		System.out.println("\n|--------------------------------------------------|\n"
+		System.out.println();
+		System.out.println("|--------------------------------------------------|\n"
 				+ "|                                                  |\n"
 				+ "|                  Program End.                    |\n"
 				+ "|             Thank you and Good-bye               |\n"
