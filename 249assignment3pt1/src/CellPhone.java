@@ -1,5 +1,3 @@
-package assignment3;
-
 import java.util.Scanner;
 
 // to do:
@@ -14,12 +12,11 @@ public class CellPhone
 	private int year;
 	private double price;
 	private long serialNum;
-	private static long serialNumCount = 7000; // increasing serial count
 	
 	// Default Constructor
 	public CellPhone()
 	{
-		serialNum = serialNumCount++;
+		serialNum = 0000000;
 		year = 2009;
 		price = 0.00;
 		brand = null;		
@@ -28,7 +25,7 @@ public class CellPhone
 	// Parameterized Constructor
 	public CellPhone(long serialNum, String brand, int year, double price)
 	{
-		serialNum = serialNumCount++;
+		this.serialNum = serialNum;
 		this.brand = brand;
 		this.year = year;
 		this.price = price;
@@ -40,7 +37,7 @@ public class CellPhone
 		setBrand(c.brand);
 		setYear(c.year);
 		setPrice(c.price);
-		setSerialNum(serialNumCount++);
+		setSerialNum(serialNum);
 	}
 	
 	// clone method
@@ -50,7 +47,7 @@ public class CellPhone
 		CellPhone phone = new CellPhone();
 		System.out.println("Please enter a valid serial number for this CellPhone: ");
 		long userSerial = kb.nextLong();
-		while (userSerial == serialNumCount) // other conditions for invalid serial numbers?
+		while (userSerial == serialNumCount) // TODO this should utilize a find() method, not an iterable serialnumber
 		{ 
 			System.out.println("I'm sorry but that is not a valid serial number. Please re-enter an unused number: ");
 			userSerial = kb.nextLong();
@@ -66,7 +63,7 @@ public class CellPhone
 	// toString Method
 	public String toString()
 	{
-		return (getBrand() + "; " + getYear() + "; " + getSerialNum() + "; " + getPrice() +"$");
+		return (getSerialNum() + ": " + getBrand() + "; " + getYear() + "; " + getPrice() +"$");
 	}
 	
 	// equals Method
@@ -121,8 +118,8 @@ public class CellPhone
 	
 	public void setSerialNum(long serialNum)
 	{ 
-		if (serialNum != serialNumCount) // is this an appropriate conditional statement?
-			this.serialNum = serialNum;
+		if (serialNum != serialNumCount) 		// fix iterable serialNum
+			this.serialNum = serialNum;			// is setSerialNum() even required?
 	}
 		
 }

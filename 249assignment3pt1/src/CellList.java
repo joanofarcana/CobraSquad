@@ -1,5 +1,3 @@
-package assignment3;
-
 // to do:
 // NoSuchElementException -> where to put the program termination
 // NullPointerException
@@ -34,7 +32,7 @@ public class CellList implements Cloneable { // probably will have to implement 
 			}
 		
 			// Inner CellNode class 
-		private class CellNode {
+		class CellNode {
 			
 			// Private Attributes
 			private CellPhone c;
@@ -120,6 +118,7 @@ public class CellList implements Cloneable { // probably will have to implement 
 		// addToStart() method
 	public CellNode addToStart(CellPhone c) {
 		CellNode node = new CellNode(c, head);
+		head = node;
 		return node; 
 	}
 	
@@ -209,6 +208,7 @@ public class CellList implements Cloneable { // probably will have to implement 
 		while (temp!=null)
 		{
 			System.out.println("[" + temp.getCellPhone() + "] --> "); // how does this display the cellphone object
+			temp = temp.next;
 		}
 		
 	}
