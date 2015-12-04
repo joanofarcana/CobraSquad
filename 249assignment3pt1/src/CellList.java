@@ -67,7 +67,8 @@ public class CellList implements Cloneable { // probably will have to implement 
                         public Object clone() {
                         CellNode cn = new CellNode(c ,next.getCellNode());
                         return cn;
-                        }			
+                        }
+                        
 			// Set Methods
 			//
 			public void setCellPhone() {
