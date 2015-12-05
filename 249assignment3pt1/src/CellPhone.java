@@ -41,17 +41,18 @@ public class CellPhone
 	}
 	
 	// clone method
-	public CellPhone clone(CellPhone c, long serialNum)
+	public CellPhone clone(CellPhone c)//don't need the serialNum parameter since we prompt the user for it
 	{
 		Scanner kb = new Scanner(System.in);
 		CellPhone phone = new CellPhone();
 		System.out.println("Please enter a valid serial number for this CellPhone: ");
 		long userSerial = kb.nextLong();
-		while (userSerial == serialNumCount) // TODO this should utilize a find() method, not an iterable serialnumber
+		//I think we should check if a serial number is duplicated outside the clone method
+		/*while (userSerial == serialNumCount) // TODO this should utilize a find() method, not an iterable serialnumber
 		{ 
 			System.out.println("I'm sorry but that is not a valid serial number. Please re-enter an unused number: ");
 			userSerial = kb.nextLong();
-		}
+		}*/
 		phone.setSerialNum(userSerial);
 		phone.setBrand(c.getBrand());
 		phone.setYear(c.getYear());
@@ -100,25 +101,25 @@ public class CellPhone
 	//
 	public void setPrice(double price)
 	{	
-		if (price>0)
+	//	if (price>0)
 			this.price = price;
 	}
 	
 	public void setBrand(String brand)
 	{
-		if (true) 						// appropriate way of distinguishing brands
+	//	if (true) 						// appropriate way of distinguishing brands
 			this.brand = brand;
 	}
 	
 	public void setYear(int year)
 	{
-		if (year >= 1985 || year <= 2020) 
+	//	if (year >= 1985 || year <= 2020) 
 			this.year = year;
 	}
 	
 	public void setSerialNum(long serialNum)
 	{ 
-		if (serialNum != serialNumCount) 		// fix iterable serialNum
+	//	if (serialNum != serialNumCount) 		// fix iterable serialNum
 			this.serialNum = serialNum;			// is setSerialNum() even required?
 	}
 		
