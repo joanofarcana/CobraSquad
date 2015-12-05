@@ -1,11 +1,10 @@
-// to do:
+// TODO
 // NullPointerException
 // exception stuff in general
 // equals() method OMG
 // clone() method ("deep clone")? -> cellNode clone
+// deleteFromStart() --> size stuff
 // deleteFromIndex() tbcompleted
-// also i totally looked this over and i had forgotten to add a replaceAtIndex() method sooo i created that
-// :)
 
 public class CellList implements Cloneable2 extends Cloneable { // probably will have to implement cloneable2 
 	
@@ -119,6 +118,7 @@ public class CellList implements Cloneable2 extends Cloneable { // probably will
 	public void addToStart(CellPhone c) {
 		CellNode node = new CellNode(c, head);
 		head = node;
+		size++;
 	}
 	
 		// insertAtIndex() method
@@ -222,6 +222,7 @@ public class CellList implements Cloneable2 extends Cloneable { // probably will
 	public boolean deleteFromStart() {
 		if (head != null) {
 			head = head.next;
+			size--; // would this actually decrease the size
 			return true;
 		}
 		else
