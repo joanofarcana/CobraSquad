@@ -1,13 +1,13 @@
 // to do:
-// NoSuchElementException -> where to put the program termination
 // NullPointerException
 // exception stuff in general
-// equals() method
+// equals() method OMG
 // clone() method ("deep clone")? -> cellNode clone
-// insertAtIndex() method (tbcompleted)
-// deleteFromIndex() method (tbcompleted)
+// deleteFromIndex() tbcompleted
+// also i totally looked this over and i had forgotten to add a replaceAtIndex() method sooo i created that
+// :)
 
-public class CellList implements Cloneable { // probably will have to implement cloneable2 
+public class CellList implements Cloneable2 extends Cloneable { // probably will have to implement cloneable2 
 	
 				// NoSuchElementException class
 		public class NoSuchElementException extends Exception
@@ -15,7 +15,7 @@ public class CellList implements Cloneable { // probably will have to implement 
 					// Default Constructor
 				public NoSuchElementException() 
 				{
-					super("That index does not exist. Program Terminates.");	// should we put the system.exit(0) here????					
+					super("That index does not exist. Program Terminates.");				
 				}
 				
 					// Input Alternative Exception Message Constructor
@@ -116,14 +116,13 @@ public class CellList implements Cloneable { // probably will have to implement 
 	}
 		
 		// addToStart() method
-	public CellNode addToStart(CellPhone c) {
+	public void addToStart(CellPhone c) {
 		CellNode node = new CellNode(c, head);
 		head = node;
-		return node; 
 	}
 	
 		// insertAtIndex() method
-	public CellNode insertAtIndex(CellPhone c, int index) { 
+	public void insertAtIndex(CellPhone c, int index) { 
 
 		try{
 			if (index <0 || index > size()-1)
@@ -133,13 +132,59 @@ public class CellList implements Cloneable { // probably will have to implement 
 		{
 			String s = ne.getMessage();
 			System.out.println(s);
-			System.exit(0); 		// should it be here or in the actual exception constructor
+			System.exit(0); 
 		}
 		// if valid, creates and inserts node at index chosen by user
-		System.out.println("Valid index chosen. Node is currently being created and inserted at desired index .");
-		CellNode node = new CellNode(); // new CellNode is created with CellPhone c and Pointer
-		return node;
+		System.out.println("Valid index chosen. Node is currently being created with CellPhone" + c + "and inserted at index " + index + ".");
+		
+		CellNode temp = head;
+		int i = 0;
+		if (index == 0)
+		{
+			CellNode node = new CellNode(c, head);
+			head = node;
+			node = null;
+		}
+		else
+		{
+			while (i != index-1)
+			{
+				temp = temp.next;
+				i++;
+			}
+			CellNode node = new CellNode(c, temp.next);
+			temp.next = node;
+			node = null; //why
+		}
+		size++;
 	}
+	
+	// replaceAtIndex() method
+		public void replaceAtIndex(CellPhone c, int index)
+		{
+			if (index <0 || index > size-1)
+			{
+				return;
+			}
+			else
+			{
+				if (index == 0)
+				{
+					CellNode node = new CellNode(c, head);
+					head = node;
+					node = null;
+				}
+				int i = 0;
+				CellNode temp = head;
+				while(i != index)
+				{
+					temp = temp.next;
+					i++;
+				}
+				System.out.println("Valid index chosen. Now replacing CellPhone " + temp.c + " at index " + index + " to " + c + ".");
+				temp.c = c;	
+			}
+		}
 	
 		// deleteFromIndex() method
 	public void deleteFromIndex(int index) {
@@ -154,13 +199,29 @@ public class CellList implements Cloneable { // probably will have to implement 
 			System.out.println(s);
 			System.exit(0);
 		}
-		// if valid, deletes node at index chosen by user; ties together broken list
+		
+		int i = 0;
+		CellNode temp = head;
+		
+		if (index == 0)
+		{
+			head = head.next;
+		}
+		else {
+			while(i != index-1)
+			{
+				temp = temp.next; 
+				i++;
+			}
+			temp = temp.next.next;
+		}
+		size--; /// kind of confused ok goodnight
 	}
 
-		// deleteFromStart() method
+	// deleteFromStart() method
 	public boolean deleteFromStart() {
 		if (head != null) {
-			head = head.getCellNode();
+			head = head.next;
 			return true;
 		}
 		else
@@ -207,7 +268,7 @@ public class CellList implements Cloneable { // probably will have to implement 
 		}
 		while (temp!=null)
 		{
-			System.out.println("[" + temp.getCellPhone() + "] --> "); // how does this display the cellphone object
+			System.out.println("[" + temp.getCellPhone() + "] --> "); 
 			temp = temp.next;
 		}
 		
@@ -218,7 +279,7 @@ public class CellList implements Cloneable { // probably will have to implement 
 	public boolean equals(CellList cl)
 	{
 		if (cl != null 
-				&& getCellPhone() == cn.getCellPhone()) /////???????????????????
+				&& getCellPhone() == cn.getCellPhone()) /////YES I KNOW TOTALLY SHIT
 			return true;	
 		else
 			return false;
