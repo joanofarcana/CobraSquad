@@ -33,12 +33,12 @@ public class CellList implements Cloneable {
 				next = node.getNext();
 			}
 			
-            //Deep copy			
-            public Object clone() {
-	            CellNode cn = new CellNode(this.getCellPhone(), this.getNext());
-	            return cn;
-            }
-                        
+	                //Deep copy			
+	                public Object clone() {
+		            CellNode cn = new CellNode(this.getCellPhone(), this.getNext());
+		            return cn;
+	            	}
+	                        
 			// Set Methods
 			//
 			public void setCellPhone(CellPhone c) {
