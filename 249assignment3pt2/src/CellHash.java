@@ -11,7 +11,7 @@ public class CellHash{
 
     private static CellList[] hashArr;
     
-    public static void CellHash(){
+    public CellHash(){
         hashArr = new CellList[] {new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList(), new CellList()};
     }
 
@@ -31,7 +31,7 @@ public class CellHash{
            phones = line.split(" ");
            hash = computerHashValue(Long.parseLong(phones[0]));
            if(hashArr[hash].contains(Long.parseLong(phones[0]))==false){
-                hashArr[hash].insertAtIndex(new CellPhone(Long.parseLong(phones[0]),phones[1],Integer.parseInt(phones[3]),Double.parseDouble(phones[2])), hashArr[hash].size());
+                hashArr[hash].insertAtIndex(new CellPhone(Long.parseLong(phones[0]),phones[1],Integer.parseInt(phones[3]),Double.parseDouble(phones[2])), hashArr[hash].getSize());
            }
            
         }
