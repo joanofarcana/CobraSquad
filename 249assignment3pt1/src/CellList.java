@@ -1,7 +1,6 @@
 // TODO
 // NullPointerException
 // exception stuff in general
-// equals() method OMG
 // clone() method ("deep clone")? -> cellNode clone
 // deleteFromStart() --> size stuff
 // deleteFromIndex() tbcompleted
@@ -276,15 +275,25 @@ public class CellList implements Cloneable2 extends Cloneable { // probably will
 	}
 	
 	
-		// equals() method
+	// equals() method
 	public boolean equals(CellList cl)
 	{
-		if (cl != null 
-				&& getCellPhone() == cn.getCellPhone()) /////YES I KNOW TOTALLY SHIT
-			return true;	
-		else
-			return false;
+		CellNode temp = head;
+		CellNode temp2 = cl.head;
+		while (temp!=null)
+		{
+			if (temp.c != temp2.c)
+			{
+				return false;
+			}
+			else
+			{
+				temp = temp.next;
+				temp2 = temp.next;
+			}
 		}
+		return true;
+		temp = null; temp2 = null;
 	}
-
+}
 
