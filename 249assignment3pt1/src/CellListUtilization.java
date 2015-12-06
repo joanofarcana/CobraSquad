@@ -109,7 +109,74 @@ public class CellListUtilization {
 				System.out.println("List1 and list2 are not equal. Something is wrong.");
 			
 			// create some new CellPhones
-			System.out.println("");
+			System.out.println("Let's enter some new cell phones.");
+			// default constructor
+			Scanner user = new Scanner(System.in);
+			System.out.print("Please enter a brand: ");
+			String brand = user.next();
+			System.out.print("Please enter a price: ");
+			double price = user.nextDouble();
+			System.out.print("Please enter a year: ");
+			int year = user.nextInt();
+			System.out.print("And finally, enter a unique serial number: ");
+			long serial = user.nextLong();
+			
+			CellPhone cell = new CellPhone(serial, brand, year, price);
+			System.out.println("Your cell phone: " + cell);
+			
+			// copy constructor
+			System.out.println("We'll now copy this cell phone with a new serial number.");
+			System.out.print("Please enter a new serial number: ");
+			long newSerial = user.nextLong();
+			
+			CellPhone newCell = new CellPhone(cell, newSerial);
+			System.out.println("Your cell phone copy: " + newCell);
+			
+			// clone() method
+			System.out.println("Now we'll clone your cell phone.");
+			CellPhone cellClone = cell.clone();
+			System.out.println("Your cell phone clone: " + cellClone);
+			user.close();
+			
+			// are these cell phones equal?
+			if (cell.equals(newCell) 
+					&& newCell.equals(cellClone) 
+					&& cellClone.equals(cellClone)) {
+				System.out.println("All three cell phones are equal.");
+			}
+			else
+				System.out.println("One of these things is not like the others.");
+			
+			// time to play with CellList
+			// add cell to start
+			System.out.println("Now adding your original cell to the start.");
+			list2.addToStart(cell);
+			
+			// add newCell to an index
+			System.out.println("Let's add your cell phone copy at index 11.");
+			list2.insertAtIndex(newCell, 11);
+			
+			// replace cell at index with cellClone
+			System.out.println("Next, we'll replace the cell phone at index 7 with your cell phone clone.");
+			list2.replaceAtIndex(cellClone, 7);
+			
+			// delete from index
+			System.out.println("Now deleting the node at index 5.");
+			list2.deleteFromIndex(5);
+			
+			// delete from start
+			System.out.println("And finally, we'll delete the first node in the list.");
+			list2.deleteFromStart();
+			
+			// show contents
+			System.out.println("Here is the what the second list looks like now: ");
+			list2.showContents();
+			
+			// are list1 and list2 still equal?
+			if (!list1.equals(list2))
+				System.out.println("List1 and list2 aren't equal.");
+			else
+				System.out.println("They're twins! That's not good.");
 		}
 		catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());

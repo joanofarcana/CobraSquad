@@ -73,7 +73,16 @@ public class CellList implements Cloneable {
 	
 	// Copy Constructor
 	public CellList(CellList cl) {
-		this.head = cl.head;
+		CellNode pos = cl.head.getNext();
+		head = new CellNode(cl.head);
+		CellNode newPos = head;
+		while (pos != null) {
+			CellNode temp = new CellNode(pos);
+			newPos.setNext(temp);
+			newPos = temp;
+			pos = pos.getNext();
+		}
+		newPos.setNext(null);
 		this.size = cl.size;
 	}
 
@@ -186,11 +195,15 @@ public class CellList implements Cloneable {
 	
 	// equals() method
 	public boolean equals(CellList cl) {
-		CellNode pos = head;
-		CellNode pos2 = cl.head;
+		return (isSuperset(this, cl) && isSuperset(cl, this));
+	}
+	
+	private boolean isSuperset(CellList list1, CellList list2) {
+		CellNode pos = list1.head;
 		
 		while (pos != null) {	
-			while (!pos.equals(pos2)) {
+			CellNode pos2 = list2.head;
+			while (!pos.getCellPhone().equals(pos2.getCellPhone())) {
 				pos2 = pos2.getNext();
 				if (pos2 == null)
 					return false;

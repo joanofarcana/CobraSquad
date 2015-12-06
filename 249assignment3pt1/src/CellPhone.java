@@ -41,15 +41,15 @@ public class CellPhone
 	}
 	
 	// clone method
-	public CellPhone clone(CellPhone c) {
+	public CellPhone clone() {
 		Scanner kb = new Scanner(System.in);
 		CellPhone phone = new CellPhone();
-		System.out.println("Please enter a new serial number for this CellPhone: ");
+		System.out.print("Please enter a new serial number for this cell phone: ");
 		long userSerial = kb.nextLong();
 		phone.setSerialNum(userSerial);
-		phone.setBrand(c.getBrand());
-		phone.setYear(c.getYear());
-		phone.setPrice(c.getPrice());
+		phone.setBrand(this.getBrand());
+		phone.setYear(this.getYear());
+		phone.setPrice(this.getPrice());
 		
 		kb.close();
 		return phone;
@@ -63,9 +63,9 @@ public class CellPhone
 	// equals Method
 	public boolean equals(CellPhone c) { 
 		if (c != null 
-				&& getPrice() == c.getPrice() 
+				&& (Math.abs(getPrice() - c.getPrice()) < .01) 
 				&& getYear() == c.getYear() 
-				&& getBrand() == c.getBrand())
+				&& getBrand().equals(c.getBrand()))
 			return true;	
 		else
 			return false;
