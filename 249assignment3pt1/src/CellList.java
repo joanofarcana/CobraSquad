@@ -271,7 +271,7 @@ public class CellList implements Cloneable2 extends Cloneable { // probably will
 			System.out.println("[" + temp.getCellPhone() + "] --> "); 
 			temp = temp.next;
 		}
-		
+		temp = null;
 	}
 	
 	
