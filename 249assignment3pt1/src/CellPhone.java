@@ -1,11 +1,5 @@
 import java.util.Scanner;
 
-// to do:
-// implements cloneable? cloneable 2? 
-// conditional for setBrand() : what is appropriate? [one word brands]
-// fix equals method [duplicate serial number issue]
-// for setSerialNum() and clone() methods : are the conditionals for checking serial number duplicity valid?
-
 public class CellPhone 
 {
 	private String brand;
@@ -93,26 +87,22 @@ public class CellPhone
 	//
 	public void setPrice(double price)
 	{	
-	//	if (price>0)
 			this.price = price;
 	}
 	
 	public void setBrand(String brand)
 	{
-	//	if (true) 						// appropriate way of distinguishing brands
 			this.brand = brand;
 	}
 	
 	public void setYear(int year)
 	{
-	//	if (year >= 1985 || year <= 2020) 
 			this.year = year;
 	}
 	
 	public void setSerialNum(long serialNum)
 	{ 
-	//	if (serialNum != serialNumCount) 		// fix iterable serialNum
-			this.serialNum = serialNum;			// is setSerialNum() even required?
+			this.serialNum = serialNum;		
 	}
 		
 }
