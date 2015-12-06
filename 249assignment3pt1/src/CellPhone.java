@@ -41,35 +41,27 @@ public class CellPhone
 	}
 	
 	// clone method
-	public CellPhone clone(CellPhone c)//don't need the serialNum parameter since we prompt the user for it
-	{
+	public CellPhone clone(CellPhone c) {
 		Scanner kb = new Scanner(System.in);
 		CellPhone phone = new CellPhone();
-		System.out.println("Please enter a valid serial number for this CellPhone: ");
+		System.out.println("Please enter a new serial number for this CellPhone: ");
 		long userSerial = kb.nextLong();
-		//I think we should check if a serial number is duplicated outside the clone method
-		/*while (userSerial == serialNumCount) // TODO this should utilize a find() method, not an iterable serialnumber
-		{ 
-			System.out.println("I'm sorry but that is not a valid serial number. Please re-enter an unused number: ");
-			userSerial = kb.nextLong();
-		}*/
 		phone.setSerialNum(userSerial);
 		phone.setBrand(c.getBrand());
 		phone.setYear(c.getYear());
 		phone.setPrice(c.getPrice());
 		
+		kb.close();
 		return phone;
 	}
 	
 	// toString Method
-	public String toString()
-	{
+	public String toString() {
 		return (getSerialNum() + ": " + getBrand() + "; " + getYear() + "; " + getPrice() +"$");
 	}
 	
 	// equals Method
-	public boolean equals(CellPhone c) // add something about duplicate serial number
-	{ 
+	public boolean equals(CellPhone c) { 
 		if (c != null 
 				&& getPrice() == c.getPrice() 
 				&& getYear() == c.getYear() 

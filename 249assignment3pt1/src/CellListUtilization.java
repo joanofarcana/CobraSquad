@@ -75,40 +75,53 @@ public class CellListUtilization {
 			BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
 			String userInput;
 			long userSerial;
-			int searchCount = 0;
 			cont = true;
 			System.out.println("Let's search for a serial number.");
 			while (cont) {
 				System.out.print("Please enter a serial number to search for: ");
 				userSerial = Long.parseLong(keyboard.readLine());
 				
-				if (list1.find(userSerial) != null) {
-					System.out.println("Serial number found. " + list1.find(userSerial).getCellPhone());
+				CellList.CellNode duplicate = list1.find(userSerial);
+				if (duplicate != null) {
+					System.out.println("Serial number found. " + duplicate.getCellPhone());
 				}
 				else {
 					System.out.println("Serial number not found.");
 				}
-				searchCount++;
 				
 				System.out.print("Would you like to search for another serial number? (Y/N) ");
 				userInput = keyboard.readLine();
 				if (userInput.equalsIgnoreCase("n") || userInput.equalsIgnoreCase("no")) {
 					cont = false;
-					System.out.println("Searched " + searchCount + " time(s).");
+					System.out.println();
 				}
-				
-				
-				// Playing with Accessors and Mutators
-				
-				
 			}
+			
+			// Playing with Methods
+			// copying list1 into list2
+			System.out.println("Now copying list1 to list2.");
+			list2 = new CellList(list1);
+			
+			// are they the same?
+			if (list1.equals(list2)) 
+				System.out.println("List1 and list2 are equal.");
+			else
+				System.out.println("List1 and list2 are not equal. Something is wrong.");
+			
+			// create some new CellPhones
+			System.out.println("");
 		}
 		catch (FileNotFoundException e) {
-			System.out.println("The selected file could not be found.");
+			System.out.println(e.getMessage());
 			System.out.println("The program will now terminate.");
 		}
 		catch (IOException e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
+			System.out.println("The program will now terminate.");
+		}
+		catch (NoSuchElementException e) {
+			System.out.println(e.getMessage());
+			System.out.println("The program will now terminate.");
 		}
 		
 		
