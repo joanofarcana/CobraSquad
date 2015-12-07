@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------
+// Assignment 3 part 1
+
+// Written by:	Kyla Lea			21280090
+//				Himmet Arican		27533934
+//				Nina Prentiss		26270611
+
+// For COMP249/2 Section D 
+// ---------------------------------------------------------------
 import java.util.*;
 
 // TODO
@@ -23,8 +32,6 @@ public class CellList implements Cloneable {
 			public CellNode(CellPhone c, CellNode next) {
 				this.c = c;
 				this.next = next;
-				
-				System.out.println("Initializing CellNode...");
 			}
 			
 			// Copy Constructor

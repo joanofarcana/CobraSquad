@@ -1,9 +1,9 @@
 // ---------------------------------------------------------------
-//
 // Assignment 3 part 1
+
 // Written by: Nina Prentiss		26270611
+
 // For COMP249/2 Section D 
-//
 // ---------------------------------------------------------------
 
 import java.io.*;
@@ -187,6 +187,10 @@ public class CellListUtilization {
 			System.out.println("The program will now terminate.");
 		}
 		catch (NoSuchElementException e) {
+			System.out.println(e.getMessage());
+			System.out.println("The program will now terminate.");
+		}
+		catch (NullPointerException e) {
 			System.out.println(e.getMessage());
 			System.out.println("The program will now terminate.");
 		}

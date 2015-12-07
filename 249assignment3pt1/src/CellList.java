@@ -1,8 +1,13 @@
-import java.util.*;
+// ---------------------------------------------------------------
+// Assignment 3 part 1
 
-// TODO
-// NullPointerException
-// exception stuff in general
+// Written by:	Kyla Lea			21280090
+//				Himmet Arican		27533934
+//				Nina Prentiss		26270611
+
+// For COMP249/2 Section D 
+// ---------------------------------------------------------------
+import java.util.*;
 
 public class CellList implements Cloneable { 
 	

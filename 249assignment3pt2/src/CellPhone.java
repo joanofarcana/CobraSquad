@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------
+// Assignment 3 part 1
+
+// Written by:	Kyla Lea			21280090
+//				Himmet Arican		27533934
+//				Nina Prentiss		26270611
+
+// For COMP249/2 Section D 
+// ---------------------------------------------------------------
 import java.util.Scanner;
 
 // to do:
