@@ -112,7 +112,6 @@ public class CellList implements Cloneable {
 		CellNode node = new CellNode(c, pos.next);
 		pos.next = node;
 		size++;
-		pos = null;		// set node to null to circumvent privacy leak
 	}
 	
 	// replaceAtIndex() method
@@ -128,7 +127,6 @@ public class CellList implements Cloneable {
 		}
 		
 		pos.setCellPhone(c);
-		pos = null; 		// set node to null to circumvent privacy leak
 	}
 
 	// deleteFromIndex() method
@@ -149,7 +147,6 @@ public class CellList implements Cloneable {
 		}
 		pos.setNext(pos.getNext().getNext());
 		size--;
-		pos = null;		// set node to null to circumvent privacy leak
 	}
 
 	// deleteFromStart() method
@@ -177,8 +174,8 @@ public class CellList implements Cloneable {
 			temp = temp.getNext();
 			count++;
 		}
-		return null;
 		temp = null; 		// set node to null to circumvent privacy leak
+		return null;
 	}
 	
 		// showContents() method
@@ -194,7 +191,6 @@ public class CellList implements Cloneable {
 			System.out.println("[" + pos.getCellPhone() + "] --> "); 
 			pos = pos.getNext();
 		}
-		pos = null;		// set node to null to circumvent privacy leak
 	}
 	
 	
@@ -215,8 +211,8 @@ public class CellList implements Cloneable {
 			}
 			pos = pos.getNext();
 		}
-		return true;
 		pos = pos2 = null;		// set node to null to circumvent privacy leak
+		return true;
 	}
 }
 
