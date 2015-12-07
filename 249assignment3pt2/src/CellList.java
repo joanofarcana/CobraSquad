@@ -33,12 +33,12 @@ public class CellList implements Cloneable {
 				next = node.getNext();
 			}
 			
-            //Deep copy			
-            public Object clone() {
-	            CellNode cn = new CellNode(this.getCellPhone(), this.getNext());
-	            return cn;
-            }
-                        
+	                //Deep copy			
+	                public Object clone() {
+		            CellNode cn = new CellNode(this.getCellPhone(), this.getNext());
+		            return cn;
+	            	}
+	                        
 			// Set Methods
 			//
 			public void setCellPhone(CellPhone c) {
@@ -86,12 +86,7 @@ public class CellList implements Cloneable {
 		this.size = cl.size;
 	}
 
-	
-	// getSize() accessor
-	public int getSize() {
-		return this.size;
-	}
-	
+		
 	// addToStart() method
 	public void addToStart(CellPhone c) {
 		CellNode node = new CellNode(c, head);
@@ -179,6 +174,7 @@ public class CellList implements Cloneable {
 			temp = temp.getNext();
 			count++;
 		}
+		temp = null; 		// set node to null to circumvent privacy leak
 		return null;
 	}
 	
@@ -215,6 +211,7 @@ public class CellList implements Cloneable {
 			}
 			pos = pos.getNext();
 		}
+		pos = pos2 = null;		// set node to null to circumvent privacy leak
 		return true;
 	}
 }
