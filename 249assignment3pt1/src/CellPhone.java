@@ -5,13 +5,10 @@
 //				Himmet Arican		27533934
 //				Nina Prentiss		26270611
 
-<<<<<<< HEAD
 // For COMP249/2 Section D 
 // ---------------------------------------------------------------
 import java.util.Scanner;
 
-=======
->>>>>>> origin/master
 public class CellPhone 
 {
 	private String brand;
@@ -99,38 +96,26 @@ public class CellPhone
 	//
 	public void setPrice(double price)
 	{	
-<<<<<<< HEAD
 		this.price = price;
-=======
 			this.price = price;
->>>>>>> origin/master
 	}
 	
 	public void setBrand(String brand)
 	{
-<<<<<<< HEAD
 		this.brand = brand;
-=======
 			this.brand = brand;
->>>>>>> origin/master
 	}
 	
 	public void setYear(int year)
 	{
-<<<<<<< HEAD
 		this.year = year;
-=======
 			this.year = year;
->>>>>>> origin/master
 	}
 	
 	public void setSerialNum(long serialNum)
 	{ 
-<<<<<<< HEAD
 		this.serialNum = serialNum;
-=======
 			this.serialNum = serialNum;		
->>>>>>> origin/master
 	}
 		
 }

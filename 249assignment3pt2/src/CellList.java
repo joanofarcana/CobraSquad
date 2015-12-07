@@ -218,7 +218,6 @@ public class CellList implements Cloneable {
 			}
 			pos = pos.getNext();
 		}
-		pos = pos2 = null;		// set node to null to circumvent privacy leak
 		return true;
 	}
 }
